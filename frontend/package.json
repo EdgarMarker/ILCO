@@ -10,7 +10,7 @@
     "format": "biome format --write"
   },
   "dependencies": {
-    "@gsap/react": "^2.1.2",
+    "@gsap/react": "2.1.2",
     "@portabletext/react": "4.0.1",
     "gsap": "file:gsap-bonus.tgz",
     "next": "15.5.0",

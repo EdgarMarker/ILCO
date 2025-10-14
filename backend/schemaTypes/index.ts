@@ -1,7 +1,7 @@
 import company from "./company";
-import catalogPage from "./pages/catalog/catalogPage";
 import {
 	blogPage,
+	catalogPage,
 	homePage,
 	post,
 	postAuthor,
@@ -9,6 +9,7 @@ import {
 	product,
 	productCategory,
 } from "./pages/index";
+import testimonial from "./testimonial";
 
 export const schemaTypes = [
 	homePage,
@@ -19,5 +20,6 @@ export const schemaTypes = [
 	post,
 	postAuthor,
 	postCategory,
+	testimonial,
 	company,
 ];

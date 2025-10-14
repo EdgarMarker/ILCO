@@ -1,4 +1,5 @@
 import {
+	FaComment,
 	FaDesktop,
 	FaNewspaper,
 	FaRegBuilding,
@@ -54,16 +55,14 @@ export const structure: StructureResolver = (S) =>
 						.title("Lista de Artículos")
 						.filter('_type == "post"'),
 				),
-			/*
 			S.listItem()
-				.icon(BsHouseCheck)
+				.icon(FaComment)
 				.title("Lista de Testimonios")
 				.child(
 					S.documentTypeList("testimonial")
 						.title("Lista de Testimonios")
 						.filter('_type == "testimonial"'),
 				),
-        */
 			//----------------------------------------------
 			S.divider(),
 			//----------------------------------------------

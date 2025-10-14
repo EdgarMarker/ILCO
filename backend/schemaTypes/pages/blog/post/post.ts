@@ -83,4 +83,10 @@ export default {
 		...SECTIONS.map(({ group, fields }) => createSection(group, fields)),
 		SEO(),
 	],
+	preview: {
+		select: {
+			title: "general.string_line_general_title",
+			media: "card.img_card_img",
+		},
+	},
 };

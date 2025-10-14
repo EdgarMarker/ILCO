@@ -29,7 +29,7 @@ export default {
 	],
 	preview: {
 		select: {
-			title: "string_text_line_primary",
+			title: "string_line_author_name",
 		},
 	},
 };

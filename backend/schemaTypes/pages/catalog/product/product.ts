@@ -1,7 +1,7 @@
 import { createSection } from "../../../../utils/helper-createSection";
 import { HERO, image, SEO, slug, stringText } from "../../../modules/modules";
 
-export const MAGIC_TITLE = "Producto";
+export const MAGIC_TITLE = "Proyecto";
 
 const SECTIONS = [
 	{
@@ -62,8 +62,8 @@ export default {
 	],
 	preview: {
 		select: {
-			title: "general.string_text_line_primary",
-			media: "card.imgCard",
+			title: "general.string_line_general_title",
+			media: "card.img_card_img",
 		},
 	},
 };

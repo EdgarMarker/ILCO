@@ -169,12 +169,11 @@ export const HERO = () => {
 		fields: [
 			stringH1(),
 			listBlockText({ type: "title", context: "hero", purpose: "title" }),
-			listBlockText({ type: "info", context: "hero", purpose: "info" }),
 			stringText({
 				type: "line",
 				context: "hero",
 				purpose: "button",
-				title: "Texto del botón",
+				title: "Texto del botón (CTA opcional)",
 			}),
 			image({
 				type: "img",
@@ -182,20 +181,13 @@ export const HERO = () => {
 				purpose: "banner",
 				title: "Imagen de la cabecera",
 			}),
-			{
-				name: "list_obj_items",
-				title: "Lista de elementos flotantes",
-				type: "array",
-				of: [
-					{
-						type: "object",
-						fields: [
-							listBlockText({ type: "title", context: "hero", purpose: "item" }),
-							image({ type: "icon", context: "hero", purpose: "item" }),
-						],
-					},
-				],
-			},
+			image({
+				type: "img",
+				context: "hero",
+				purpose: "png",
+				title: "Imagen PNG decorativa (opcional)",
+			}),
+
 		],
 	};
 };
