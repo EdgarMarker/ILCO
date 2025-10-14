@@ -1,15 +1,39 @@
 import { createSection } from "../../../utils/helper-createSection";
-import { HERO, SEO, stringText } from "../../modules/modules";
+import { HERO, image, listBlockText, SEO, stringText } from "../../modules/modules";
+import { MAGIC_TITLE } from "./product/product";
 
 const SECTIONS = [
 	{
-		group: { name: "intro", title: "Introducción" },
+		group: { name: "products", title: `Sección de ${MAGIC_TITLE}s` },
 		fields: [
+			listBlockText({
+				type: "title",
+				context: "products",
+				purpose: "title",
+				title: "Título y introducción",
+			}),
+		],
+	},
+	{
+		group: { name: "machines", title: "Sección de máquinas" },
+		fields: [
+			listBlockText({
+				type: "title",
+				context: "machines",
+				purpose: "title",
+				title: "Título y introducción",
+			}),
 			stringText({
 				type: "line",
-				context: "intro",
-				purpose: "title",
-				title: "Título de introducción",
+				context: "machines",
+				purpose: "btn",
+				title: "Texto del botón (CTA)",
+			}),
+			image({
+				type: "img",
+				context: "machines",
+				purpose: "banner",
+				title: "Imagen de la sección de máquinas",
 			}),
 		],
 	},
@@ -21,7 +45,7 @@ export default {
 	groups: [
 		{
 			name: "hero",
-			title: "Hero",
+			title: "Cabecera",
 		},
 		...SECTIONS.map(({ group }) => group),
 		{
@@ -34,4 +58,9 @@ export default {
 		...SECTIONS.map(({ group, fields }) => createSection(group, fields)),
 		SEO(),
 	],
+	preview: {
+		select: {
+			title: "hero.string_h1",
+		},
+	},
 };

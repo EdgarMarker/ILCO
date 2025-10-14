@@ -3,7 +3,7 @@ export const createSection = (
 	fields: any[] = [],
 ) => ({
 	name: groupData.name,
-	title: `Sección ${groupData.title}`,
+	title: `${groupData.title}`,
 	type: "object",
 	group: groupData.name,
 	fields,

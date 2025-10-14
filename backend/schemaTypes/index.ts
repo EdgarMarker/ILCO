@@ -1,8 +1,13 @@
 import company from "./company";
 import {
+	aboutPage,
 	blogPage,
+	catalogMachinesPage,
 	catalogPage,
+	contactPage,
 	homePage,
+	machine,
+	machineCategory,
 	post,
 	postAuthor,
 	postCategory,
@@ -13,7 +18,11 @@ import testimonial from "./testimonial";
 
 export const schemaTypes = [
 	homePage,
+	aboutPage,
 	catalogPage,
+	catalogMachinesPage,
+	machine,
+	machineCategory,
 	product,
 	productCategory,
 	blogPage,
@@ -21,5 +30,6 @@ export const schemaTypes = [
 	postAuthor,
 	postCategory,
 	testimonial,
+	contactPage,
 	company,
 ];

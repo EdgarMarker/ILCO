@@ -1,6 +1,5 @@
 import { createSection } from "../../../../utils/helper-createSection";
 import {
-	HERO,
 	image,
 	listBlockText,
 	SEO,
@@ -31,23 +30,17 @@ const SECTIONS = [
 				type: "reference",
 				to: [{ type: "postAuthor" }],
 			},
-		],
-	},
-	{
-		group: { name: "card", title: "Tarjeta" },
-		fields: [
 			stringText({
 				type: "textarea",
-				context: "card",
-				purpose: "dsc",
-				title: "Descripción breve",
-				dsc: "Descripción breve que aparecerá en la tarjeta del artículo",
+				context: "general",
+				purpose: "cardExcerpt",
+				title: `Descripción breve del artículo`,
 			}),
 			image({
 				type: "img",
-				context: "card",
-				purpose: "img",
-				title: "Imagen de la tarjeta",
+				context: "general",
+				purpose: "primaryImg",
+				title: `Imagen del artículo`,
 			}),
 		],
 	},
@@ -68,10 +61,6 @@ export default {
 	type: "document",
 	title: "Artículos de Blog",
 	groups: [
-		{
-			name: "hero",
-			title: "Hero",
-		},
 		...SECTIONS.map(({ group }) => group),
 		{
 			name: "seo",
@@ -79,7 +68,6 @@ export default {
 		},
 	],
 	fields: [
-		HERO(),
 		...SECTIONS.map(({ group, fields }) => createSection(group, fields)),
 		SEO(),
 	],

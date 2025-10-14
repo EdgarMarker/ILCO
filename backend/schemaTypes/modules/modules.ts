@@ -117,6 +117,15 @@ export const slug = ({ value }: { value: string }) => {
 	};
 };
 
+//*! ----- BOOLEAN -----
+export const bool = ({ context, purpose, title }: Props) => {
+	return {
+		name: `bool_${context}_${purpose}`,
+		title: title,
+		type: "boolean",
+	};
+}
+
 //*! ----- COMPONENTS -----
 
 export const SEO = () => {

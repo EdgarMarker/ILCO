@@ -1,8 +1,13 @@
+export { default as aboutPage } from "./about/aboutPage";
 export { default as blogPage } from "./blog/blogPage";
 export { default as post } from "./blog/post/post";
 export { default as postAuthor } from "./blog/post/postAuthor";
 export { default as postCategory } from "./blog/post/postCategory";
+export { default as catalogMachinesPage } from "./catalog/catalogMachinesPage";
 export { default as catalogPage } from "./catalog/catalogPage";
+export { default as machine } from "./catalog/machine/machine";
+export { default as machineCategory } from "./catalog/machine/machineCategory";
 export { default as product } from "./catalog/product/product";
 export { default as productCategory } from "./catalog/product/productCategory";
+export { default as contactPage } from "./contactPage";
 export { default as homePage } from "./homePage";

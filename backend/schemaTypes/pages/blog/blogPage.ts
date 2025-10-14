@@ -1,15 +1,25 @@
 import { createSection } from "../../../utils/helper-createSection";
-import { HERO, SEO, stringText } from "../../modules/modules";
+import { listBlockText, SEO } from "../../modules/modules";
 
 const SECTIONS = [
 	{
-		group: { name: "intro", title: "Introducción" },
+		group: { name: "featured", title: "Articulo Destacado" },
 		fields: [
-			stringText({
-				type: "line",
-				context: "intro",
+			{
+				name: "ref_post",
+				title: "Artículo Destacado",
+				type: "reference",
+				to: [{ type: "post" }],
+			},
+		],
+	},
+	{
+		group: { name: "post", title: "Artículos" },
+		fields: [
+			listBlockText({
+				type: "title",
+				context: "blogPage",
 				purpose: "title",
-				title: "Título de introducción",
 			}),
 		],
 	},
@@ -18,10 +28,6 @@ export default {
 	name: "blogPage",
 	type: "document",
 	groups: [
-		{
-			name: "hero",
-			title: "Hero",
-		},
 		...SECTIONS.map(({ group }) => group),
 		{
 			name: "seo",
@@ -29,8 +35,14 @@ export default {
 		},
 	],
 	fields: [
-		HERO(),
 		...SECTIONS.map(({ group, fields }) => createSection(group, fields)),
 		SEO(),
 	],
+	preview: {
+		prepare() {
+			return {
+				title: "Blog",
+			};
+		},
+	},
 };
