@@ -1,0 +1,59 @@
+"use client";
+// @ts-ignore
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/react-splide/css";
+import { useRef } from "react";
+import type { MachineModel } from "@/_domain/models/catalog/machine/machine.model";
+import ResponsiveImage from "@/common/components/images/ResponsiveImage";
+
+interface Props {
+	machineData: MachineModel;
+}
+
+const MachineGallerySlider = ({ machineData }: Props) => {
+	const splideRef = useRef<any>(null);
+
+	const splideOptions = {
+		arrows: false,
+		pagination: true,
+		perPage: 1,
+		gap: "1rem",
+		breakpoints: {
+			768: {
+				perPage: 1,
+			},
+		},
+	};
+
+	const goToPrev = () => {
+		splideRef.current?.splide?.go("<");
+	};
+
+	const goToNext = () => {
+		splideRef.current?.splide?.go(">");
+	};
+
+	return (
+		<div>
+			{/* Botones de navegación */}
+			<div className="slider-nav">
+				<button type="submit" onClick={goToPrev} aria-label="Previous image">
+					&#8249;
+				</button>
+				<button type="submit" onClick={goToNext} aria-label="Next image">
+					&#8250;
+				</button>
+			</div>
+
+			<Splide ref={splideRef} options={splideOptions}>
+				{machineData.page.list_img.map((image, index) => (
+					<SplideSlide key={index ?? ""}>
+						<ResponsiveImage imageData={image} variant="gallery" />
+					</SplideSlide>
+				))}
+			</Splide>
+		</div>
+	);
+};
+
+export default MachineGallerySlider;

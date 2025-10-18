@@ -9,13 +9,19 @@ export interface Image {
 }
 
 export interface Block {
-	_type: "block";
-	children: Array<{
+	_type: "block" | "image";
+	children?: Array<{
 		_type: "span";
 		text: string;
 		marks?: string[];
 	}>;
-	style: string;
+	style?: string;
+	media?: {
+		url: string;
+	};
+	alt?: {
+		altText: string;
+	};
 }
 
 export interface SEO {
@@ -34,12 +40,23 @@ export class BaseModel {
 	DEFAULT_IMAGE_ALT: string;
 	DEFAULT_IMAGE_URL: string;
 	DEFAULT_NUMBER: number;
+	DEFAULT_SLUG: SLUG;
+	DEFAULT_SEO: SEO;
 
 	constructor() {
 		this.DEFAULT_STRING = "";
 		this.DEFAULT_IMAGE_ALT = "Imagen Example";
 		this.DEFAULT_IMAGE_URL = "https://picsum.photos/id/1/1440/900";
 		this.DEFAULT_NUMBER = 0;
+		this.DEFAULT_SEO = {
+			string_titleSeo: "",
+			text_descSeo: "",
+			text_keySeo: "",
+		};
+		this.DEFAULT_SLUG = {
+			_type: "slug",
+			current: "",
+		};
 	}
 
 	safeString(value: unknown): string {
@@ -78,24 +95,40 @@ export class BaseModel {
 			];
 		}
 
-		return blocks.map((block: any) => ({
-			_type: "block",
-			children:
-				Array.isArray(block.children) && block.children.length > 0
-					? block.children.map((child: any) => ({
-							_type: "span",
-							text: child.text || this.DEFAULT_STRING,
-							marks: child.marks || [],
-						}))
-					: [
-							{
+		return blocks.map((block: any) => {
+			// Si es una imagen, usar la estructura que viene de GROQ
+			if (block._type === "image") {
+				return {
+					_type: "image",
+					media: {
+						url: block.media?.url || this.DEFAULT_IMAGE_URL,
+					},
+					alt: {
+						altText: block.alt?.altText || this.DEFAULT_IMAGE_ALT,
+					},
+				};
+			}
+
+			// Si es un bloque de texto (comportamiento original)
+			return {
+				_type: "block",
+				children:
+					Array.isArray(block.children) && block.children.length > 0
+						? block.children.map((child: any) => ({
 								_type: "span",
-								text: this.DEFAULT_STRING,
-								marks: [],
-							},
-						],
-			style: block.style || "normal",
-		}));
+								text: child.text || this.DEFAULT_STRING,
+								marks: child.marks || [],
+							}))
+						: [
+								{
+									_type: "span",
+									text: this.DEFAULT_STRING,
+									marks: [],
+								},
+							],
+				style: block.style || "normal",
+			};
+		});
 	}
 
 	safeNumber(value: unknown): number {
@@ -106,5 +139,26 @@ export class BaseModel {
 			return Number(value);
 		}
 		return this.DEFAULT_NUMBER;
+	}
+	safeSlug(value: unknown): SLUG {
+		if (typeof value === "object" && value !== null) {
+			const slugValue = value as Partial<SLUG>;
+			return {
+				_type: "slug",
+				current: this.safeString(slugValue.current),
+			};
+		}
+		return this.DEFAULT_SLUG;
+	}
+	safeSEO(value: unknown): SEO {
+		if (typeof value === "object" && value !== null) {
+			const seoValue = value as Partial<SEO>;
+			return {
+				string_titleSeo: this.safeString(seoValue.string_titleSeo),
+				text_descSeo: this.safeString(seoValue.text_descSeo),
+				text_keySeo: this.safeString(seoValue.text_keySeo),
+			};
+		}
+		return this.DEFAULT_SEO;
 	}
 }

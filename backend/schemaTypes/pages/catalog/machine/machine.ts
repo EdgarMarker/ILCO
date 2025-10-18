@@ -22,7 +22,7 @@ const SECTIONS = [
 			}),
 			slug({ value: "general.string_line_general_title" }),
 			{
-				name: "ref_productCategory",
+				name: "ref_machineCategory",
 				title: `Categorías de la ${MAGIC_TITLE}`,
 				type: "reference",
 				to: [{ type: "machineCategory" }],
@@ -57,6 +57,22 @@ const SECTIONS = [
 	{
 		group: { name: "page", title: "Página de detalle" },
 		fields: [
+			{
+				name: "list_img",
+				title: `Imágenes de la galería de la ${MAGIC_TITLE}`,
+				type: "array",
+				of: [
+					image({
+						type: "img",
+						context: "page",
+						purpose: "gallery",
+						title: `Imagen de la galería`,
+					}),
+				],
+				options: {
+					layout: "grid",
+				}
+			},
 			listBlockText({
 				type: "title",
 				context: "page",

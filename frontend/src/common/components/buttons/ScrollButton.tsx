@@ -13,9 +13,18 @@ const ScrollButton = ({ type, scrollTo, children }: Props) => {
     window.scrollTo(0, parseInt(scrollTo));
   };
   return (
-    <div onClick={handleButton} className={`btn btn__scroll--${type}`}>
+    <button
+      type="button"
+      onClick={handleButton}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          handleButton();
+        }
+      }}
+      className={`btn btn__scroll--${type}`}
+    >
       {children}
-    </div>
+    </button>
   );
 };
 

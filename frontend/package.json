@@ -12,6 +12,7 @@
   "dependencies": {
     "@gsap/react": "2.1.2",
     "@portabletext/react": "4.0.1",
+    "@splidejs/react-splide": "^0.7.12",
     "gsap": "file:gsap-bonus.tgz",
     "next": "15.5.0",
     "next-sanity": "10.0.14",
