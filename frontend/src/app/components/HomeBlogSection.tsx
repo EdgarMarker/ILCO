@@ -26,8 +26,12 @@ const HomeBlogSection = ({ blogData }: Props) => {
         arrows: false,
         pagination: false,
         perPage: 3,
-        gap: '1rem',
+        gap: '5%',
+        padding: '5%',
         breakpoints: {
+            1024:{
+                perPage: 2,
+            },
             768: {
                 perPage: 1,
             },
@@ -44,7 +48,7 @@ const HomeBlogSection = ({ blogData }: Props) => {
                     />
                 </div>
                 <div className="col__right">
-                    <div className="slider-nav">
+                    <div className="slider__nav">
                         <button
 						type="submit"
                             onClick={goToPrev}

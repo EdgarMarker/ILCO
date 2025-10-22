@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { Image as ImageType } from "@/_domain/interfaces/modules/modules.types";
+import type { Image as ImageType } from "@/_domain/models/modules/modules.model";
 
 interface ResponsiveImageProps {
   imageData: ImageType;
@@ -61,9 +61,7 @@ const ResponsiveImage = ({
   sizes,
   priority,
   className,
-  containerClassName,
   variant = "card",
-  objectFit = "cover",
 }: ResponsiveImageProps) => {
   const config = VARIANT_CONFIG[variant];
   const imageSrc = imageData.media.url;
@@ -75,7 +73,6 @@ const ResponsiveImage = ({
   const finalQuality = quality || config.quality;
 
   return (
-    <div className={containerClassName}>
       <Image
         src={imageSrc}
         alt={altText}
@@ -85,13 +82,7 @@ const ResponsiveImage = ({
         priority={finalPriority}
         quality={finalQuality}
         className={className}
-        style={{
-          width: "100%",
-          height: "auto",
-          objectFit: objectFit,
-        }}
       />
-    </div>
   );
 };
 

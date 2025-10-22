@@ -7,6 +7,7 @@ import CustomPortableText from "@/common/components/portable-text/CustomPortable
 import { createMetadata } from "@/common/utils/helper-seo";
 import { serialize } from "@/common/utils/helper-serialize";
 import CatalogMachinesFilterSection from "./components/CatalogMachinesFilterSection";
+import "./page.css";
 
 export const generateMetadata = async () => {
 	const rawData = await getCatalogMachinesPageData();
@@ -24,7 +25,7 @@ const page = async () => {
 	);
 
 	return (
-		<>
+		<main id="Machines">
 			{/* HERO */}
 			<section className="section__hero">
 				<div className="column__2">
@@ -36,13 +37,14 @@ const page = async () => {
 						/>
 					</div>
 					<div className="col__right">
-						<ResponsiveImage
-							imageData={data.hero.img_hero_banner}
-							variant="hero"
-						/>
+						<video width="1920" height="1080" autoPlay muted preload="none" loop>
+							<source src="/videos/prueba.mp4" type="video/mp4" />
+							Tu navegador no soporta la etiqueta de video.
+						</video>
 						<ResponsiveImage
 							imageData={data.hero.img_hero_png}
 							variant="banner"
+							className="subject"
 						/>
 					</div>
 				</div>
@@ -53,7 +55,7 @@ const page = async () => {
 				dataPage={serialize(data)}
 				categories={serialize(allMachineCategories)}
 			/>
-		</>
+		</main>
 	);
 };
 

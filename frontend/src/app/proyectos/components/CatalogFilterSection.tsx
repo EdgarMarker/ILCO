@@ -56,19 +56,23 @@ const CatalogFilterSection = ({ dataPage, categories }: Props) => {
 					/>
 				</div>
 				<div className="col__right">
-					Filtrado por tipos de Proyecto:
-					<select
-						value={category}
-						onChange={(e) => setCategory(e.target.value)}
-						disabled={loading}
-					>
-						<option value="all">SELECCIONE UNA OPCIÓN</option>
-						{categories.map((cat) => (
-							<option key={cat._id} value={cat.slug.current}>
-								{cat.string_line_category_name}
-							</option>
-						))}
-					</select>
+					<label htmlFor="filterProyect">
+						Filtrar por tipo de proyecto:{" "}
+						<select
+							id="filterProyect"
+							name="filterProyect"
+							value={category}
+							onChange={(e) => setCategory(e.target.value)}
+							disabled={loading}
+						>
+							<option value="all">Seleccione una opción</option>
+							{categories.map((cat) => (
+								<option key={cat._id} value={cat.slug.current}>
+									{cat.string_line_category_name}
+								</option>
+							))}
+						</select>
+					</label>
 				</div>
 			</div>
 
@@ -77,9 +81,12 @@ const CatalogFilterSection = ({ dataPage, categories }: Props) => {
 					<div>Cargando proyectos...</div>
 				) : (
 					<>
-						{currentProducts.map((product, idx) => (
-							<ProductCard key={idx ?? ""} data={product} variant="primary" />
-						))}
+						<ul role="list" className="listado">
+							{currentProducts.map((product, idx) => (
+								<ProductCard key={idx ?? ""} data={product} variant="primary" />
+							))}
+						</ul>
+						
 
 						{totalPages > 1 && (
 							<div className="pagination">

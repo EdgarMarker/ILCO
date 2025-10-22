@@ -25,8 +25,12 @@ const HomeTestimonialSection = ({ testyData }: Props) => {
 		arrows: false,
 		pagination: false,
 		perPage: 3,
-		gap: "2rem",
+		gap: "5%",
+		padding: "5%",
 		breakpoints: {
+			1024: {
+				perPage: 2,
+			},
 			768: {
 				perPage: 1,
 			},
@@ -34,7 +38,7 @@ const HomeTestimonialSection = ({ testyData }: Props) => {
 	};
 
 	return (
-		<section>
+		<section className="section__testimonios">
 			<div className="column__2">
 				<div className="col__left">
 					<CustomPortableText
@@ -43,7 +47,7 @@ const HomeTestimonialSection = ({ testyData }: Props) => {
 					/>
 				</div>
 				<div className="col__right">
-					<div className="slider-nav">
+					<div className="slider__nav">
 						<button
 							type="submit"
 							onClick={goToPrev}
@@ -66,20 +70,18 @@ const HomeTestimonialSection = ({ testyData }: Props) => {
 				<Splide ref={splideRef} options={splideOptions}>
 					{testyData.testimonials.list_ref_testimonials.map((testy, idx) => (
 						<SplideSlide key={idx ?? ""}>
-							<article>
-								<header>
+							<div className="testimonial__content">
+								<div className="testimonial__header">
 									<CustomPortableText
 										hasImg={false}
 										data={testy.list_block_info_testimonial_content}
 									/>
-								</header>
-								<footer>
-									<blockquote>
-										<strong>{testy.string_line_testimonial_authorName}</strong>
+								</div>
+								<div className="testimonial__body">
+										<h3>{testy.string_line_testimonial_authorName}</h3>
 										<span>{testy.string_line_testimonial_authorLocation}</span>
-									</blockquote>
-								</footer>
-							</article>
+								</div>
+							</div>
 						</SplideSlide>
 					))}
 				</Splide>

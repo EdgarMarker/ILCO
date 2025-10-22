@@ -57,19 +57,23 @@ const BlogFilterSection = ({ blogPage, categories }: Props) => {
 					/>
 				</div>
 				<div className="col__right">
-					Filtrado por tipos de Artículos:
-					<select
-						value={category}
-						onChange={(e) => setCategory(e.target.value)}
-						disabled={loading}
-					>
-						<option value="all">SELECCIONE UNA OPCIÓN</option>
-						{categories.map((cat) => (
-							<option key={cat._id} value={cat.slug.current}>
-								{cat.string_line_category_name}
-							</option>
-						))}
-					</select>
+					<label htmlFor="filterTopic">
+						Filtrar por tema:{" "}
+						<select
+							id="filterTopic"
+							name="filterTopic"
+							value={category}
+							onChange={(e) => setCategory(e.target.value)}
+							disabled={loading}
+						>
+							<option value="all">Seleccione una opción</option>
+							{categories.map((cat) => (
+								<option key={cat._id} value={cat.slug.current}>
+									{cat.string_line_category_name}
+								</option>
+							))}
+						</select>
+					</label>
 				</div>
 			</div>
 
@@ -78,42 +82,44 @@ const BlogFilterSection = ({ blogPage, categories }: Props) => {
 					<div>Cargando artículos...</div>
 				) : (
 					<>
-						{currentPosts.map((post, idx) => (
-							<PostCard key={idx ?? ""} postData={post} />
-						))}
+						<div role="list" className="listado">
+							{currentPosts.map((post, idx) => (
+								<PostCard key={idx ?? ""} postData={post} />
+							))}
 
-						{totalPages > 1 && (
-							<div className="pagination">
-								<button
-									type="submit"
-									onClick={() => setPage(page - 1)}
-									disabled={page === 1}
-								>
-									‹
-								</button>
+							{totalPages > 1 && (
+								<div className="pagination">
+									<button
+										type="submit"
+										onClick={() => setPage(page - 1)}
+										disabled={page === 1}
+									>
+										‹
+									</button>
 
-								{Array.from({ length: totalPages }, (_, i) => i + 1).map(
-									(num) => (
-										<button
-											type="submit"
-											key={num}
-											onClick={() => setPage(num)}
-											className={page === num ? "active" : ""}
-										>
-											{num}
-										</button>
-									),
-								)}
+									{Array.from({ length: totalPages }, (_, i) => i + 1).map(
+										(num) => (
+											<button
+												type="submit"
+												key={num}
+												onClick={() => setPage(num)}
+												className={page === num ? "active" : ""}
+											>
+												{num}
+											</button>
+										),
+									)}
 
-								<button
-									type="submit"
-									onClick={() => setPage(page + 1)}
-									disabled={page === totalPages}
-								>
-									›
-								</button>
-							</div>
-						)}
+									<button
+										type="submit"
+										onClick={() => setPage(page + 1)}
+										disabled={page === totalPages}
+									>
+										›
+									</button>
+								</div>
+							)}
+						</div>
 					</>
 				)}
 			</div>

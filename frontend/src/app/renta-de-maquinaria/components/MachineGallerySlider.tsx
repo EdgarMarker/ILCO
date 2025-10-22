@@ -14,7 +14,7 @@ const MachineGallerySlider = ({ machineData }: Props) => {
 	const splideRef = useRef<any>(null);
 
 	const splideOptions = {
-		arrows: false,
+		arrows: true,
 		pagination: true,
 		perPage: 1,
 		gap: "1rem",
@@ -25,25 +25,12 @@ const MachineGallerySlider = ({ machineData }: Props) => {
 		},
 	};
 
-	const goToPrev = () => {
-		splideRef.current?.splide?.go("<");
-	};
-
-	const goToNext = () => {
-		splideRef.current?.splide?.go(">");
-	};
+	
 
 	return (
 		<div>
 			{/* Botones de navegación */}
-			<div className="slider-nav">
-				<button type="submit" onClick={goToPrev} aria-label="Previous image">
-					&#8249;
-				</button>
-				<button type="submit" onClick={goToNext} aria-label="Next image">
-					&#8250;
-				</button>
-			</div>
+			
 
 			<Splide ref={splideRef} options={splideOptions}>
 				{machineData.page.list_img.map((image, index) => (

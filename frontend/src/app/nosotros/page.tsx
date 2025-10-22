@@ -9,6 +9,7 @@ import ScrollButton from "@/common/components/buttons/ScrollButton";
 import { BUTTONS_TEXT } from "@/common/utils/constants-text";
 import AboutValuesSection from "./components/AboutValuesSection";
 import { serialize } from "@/common/utils/helper-serialize";
+import "./page.css";
 
 export const generateMetadata = async () => {
 	const rawData = await getAboutPageData();
@@ -21,7 +22,7 @@ const page = async () => {
 	const data = new AboutPageModel(rawData);
 
 	return (
-		<>
+		<main id="About">
 			{/* HERO */}
 			<section className="section__hero">
 				<div className="column__2">
@@ -31,21 +32,25 @@ const page = async () => {
 							hasImg={false}
 							data={data.hero.list_block_title_hero_title}
 						/>
-						<RedirectButton href="/proyectos" type="primary">
-							{data.hero.string_line_hero_button}
-						</RedirectButton>
-						<ScrollButton type="secondary" scrollTo="#intro">
-							{BUTTONS_TEXT.scrollDown}
-						</ScrollButton>
+						<div className="btn__wrapper">
+							<RedirectButton href="/proyectos" type="primary">
+								{data.hero.string_line_hero_button}
+							</RedirectButton>
+							<ScrollButton type="secondary" scrollTo="#intro">
+								{BUTTONS_TEXT.scrollDown}
+							</ScrollButton>
+						</div>
+						
 					</div>
 					<div className="col__right">
-						<ResponsiveImage
-							imageData={data.hero.img_hero_banner}
-							variant="hero"
-						/>
+						<video width="1920" height="1080" autoPlay muted preload="none" loop>
+							<source src="/videos/prueba.mp4" type="video/mp4" />
+							Tu navegador no soporta la etiqueta de video.
+						</video>
 						<ResponsiveImage
 							imageData={data.hero.img_hero_png}
 							variant="banner"
+							className="subject"
 						/>
 					</div>
 				</div>
@@ -55,16 +60,18 @@ const page = async () => {
 			<section className="section__about">
 				<div className="column__2">
 					<div className="col__left">
-						<CustomPortableText
-							hasImg={false}
-							data={data.about.list_block_title_about_title}
-						/>
-					</div>
-					<div className="col__right">
 						<ResponsiveImage
 							imageData={data.about.img_about_banner}
 							variant="banner"
 						/>
+					</div>
+					<div className="col__right">
+						<div className="portable__wrapper">
+							<CustomPortableText
+								hasImg={false}
+								data={data.about.list_block_title_about_title}
+							/>
+						</div>
 					</div>
 				</div>
 			</section>
@@ -87,10 +94,12 @@ const page = async () => {
 			<section className="section__history">
 				<div className="column__2">
 					<div className="col__left">
-						<CustomPortableText
-							hasImg={false}
-							data={data.history.list_block_title_history_title}
-						/>
+						<div className="portable__wrapper">
+							<CustomPortableText
+								hasImg={false}
+								data={data.history.list_block_title_history_title}
+							/>
+						</div>
 					</div>
 					<div className="col__right">
 						<ResponsiveImage
@@ -114,20 +123,24 @@ const page = async () => {
 						/>
 					</div>
 					<div className="col__right">
-						<CustomPortableText
-							hasImg={false}
-							data={data.machines.list_block_title_machines_title}
-						/>
-						<RedirectButton href="/proyectos" type="primary">
-							{BUTTONS_TEXT.viewProject}
-						</RedirectButton>
-						<RedirectButton href="/contacto" type="primary">
-							{data.machines.string_line_machines_btn}
-						</RedirectButton>
+						<div className="portable__wrapper">
+							<CustomPortableText
+								hasImg={false}
+								data={data.machines.list_block_title_machines_title}
+							/>
+						</div>
+						<div className="btn__wrapper">
+							<RedirectButton href="/proyectos" type="primary">
+								{BUTTONS_TEXT.viewProject}
+							</RedirectButton>
+							<RedirectButton href="/contacto" type="primary">
+								{data.machines.string_line_machines_btn}
+							</RedirectButton>
+						</div>
 					</div>
 				</div>
 			</section>
-		</>
+		</main>
 	);
 };
 

@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import type { HomePageModel } from "@/_domain/models/home-page.model";
 import ResponsiveImage from "@/common/components/images/ResponsiveImage";
 import "@splidejs/react-splide/css";
+import RedirectButton from "@/common/components/buttons/RedirectButton";
 
 interface Props {
 	projectData: HomePageModel;
@@ -17,19 +18,20 @@ const HomeProjectSlider = ({ projectData }: Props) => {
 	const [textMounted, setTextMounted] = useState(false);
 
 	const splideOptions: any = {
-		type: "loop",
 		arrows: false,
 		pagination: false,
-		drag: false,
+		drag: true,
 		autoplay: false,
 	};
 
 	const mainSliderOptions = {
 		...splideOptions,
+		type: "loop",
 	};
 
 	const textSliderOptions = {
 		...splideOptions,
+		type: "loop",
 	};
 
 	const goToPrev = () => {
@@ -68,12 +70,12 @@ const HomeProjectSlider = ({ projectData }: Props) => {
 				))}
 			</Splide>
 
-			<div className="slider-nav">
-				<button type="submit" onClick={goToPrev} aria-label="Previous slide">
+			<div className="slider__nav">
+				<button className="slider__nav__previous" type="submit" onClick={goToPrev} aria-label="Previous slide">
 					&#8249;
 				</button>
 
-				<button type="submit" onClick={goToNext} aria-label="Next slide">
+				<button className="slider__nav__next" type="submit" onClick={goToNext} aria-label="Next slide">
 					&#8250;
 				</button>
 			</div>
@@ -85,7 +87,18 @@ const HomeProjectSlider = ({ projectData }: Props) => {
 			>
 				{projectData.products.list_ref_products.map((project, index) => (
 					<SplideSlide key={index ?? ""}>
-						<p>{project.general.string_textarea_general_cardExcerpt}</p>
+						<div className="banner__text">
+							<div className="banner__left">
+								<h3><span>Categoría: </span>{project.general.ref_productCategory.string_line_category_name}</h3>
+								<h2>{project.general.string_line_general_title}</h2>
+							</div>
+							<div className="banner__right">
+								<p>{project.general.string_textarea_general_cardExcerpt}</p>
+								<RedirectButton href={`/proyectos/${project.general.slug.current}`} type="primary">
+									Ver proyecto
+								</RedirectButton>
+							</div>
+						</div>
 					</SplideSlide>
 				))}
 			</Splide>

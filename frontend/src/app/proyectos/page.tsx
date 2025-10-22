@@ -8,6 +8,7 @@ import CustomPortableText from "@/common/components/portable-text/CustomPortable
 import { createMetadata } from "@/common/utils/helper-seo";
 import { serialize } from "@/common/utils/helper-serialize";
 import CatalogFilterSection from "./components/CatalogFilterSection";
+import "./page.css";
 
 export const generateMetadata = async () => {
 	const rawData = await getCatalogPageData();
@@ -25,7 +26,7 @@ const page = async () => {
 	);
 
 	return (
-		<>
+		<main id="Projects">
 			{/* HERO */}
 			<section className="section__hero">
 				<div className="column__2">
@@ -40,13 +41,14 @@ const page = async () => {
 						</RedirectButton>
 					</div>
 					<div className="col__right">
-						<ResponsiveImage
-							imageData={data.hero.img_hero_banner}
-							variant="hero"
-						/>
+						<video width="1920" height="1080" autoPlay muted preload="none" loop>
+							<source src="/videos/prueba.mp4" type="video/mp4" />
+							Tu navegador no soporta la etiqueta de video.
+						</video>
 						<ResponsiveImage
 							imageData={data.hero.img_hero_png}
 							variant="banner"
+							className="subject"
 						/>
 					</div>
 				</div>
@@ -63,13 +65,15 @@ const page = async () => {
 			<section className="section__machines">
 				<div className="column__2">
 					<div className="col__left">
-						<CustomPortableText
-							hasImg={false}
-							data={data.machines.list_block_title_machines_title}
-						/>
-						<RedirectButton href="/contacto" type="primary">
-							{data.machines.string_line_machines_btn}
-						</RedirectButton>
+						<div className="portable__wrapper">
+							<CustomPortableText
+								hasImg={false}
+								data={data.machines.list_block_title_machines_title}
+							/>
+							<RedirectButton href="/contacto" type="primary">
+								{data.machines.string_line_machines_btn}
+							</RedirectButton>
+						</div>
 					</div>
 					<div className="col__right">
 						<ResponsiveImage
@@ -79,7 +83,7 @@ const page = async () => {
 					</div>
 				</div>
 			</section>
-		</>
+		</main>
 	);
 };
 

@@ -5,7 +5,7 @@ import Link from "next/link";
 import type { CompanyModel } from "@/_domain/models/company.model";
 import { useNavigation } from "@/common/hooks/useNavigation";
 import ResponsiveImage from "../images/ResponsiveImage";
-import style from "./Nav.module.css";
+import "./Nav.css";
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://app.ejemplo.com";
 
@@ -25,9 +25,9 @@ const Nav = ({ companyData }: Props) => {
 	} = useNavigation();
 
 	return (
-		<header className={style.header}>
+		<header>
 			<nav>
-				<Link href="/" className={style.logo} aria-label="Ir al inicio">
+				<Link href="/" className="logo" aria-label="Ir al inicio">
 					{companyData?.general.icon_general_navLogo ? (
 						<ResponsiveImage
 							imageData={companyData?.general.icon_general_navLogo}
@@ -38,14 +38,14 @@ const Nav = ({ companyData }: Props) => {
 					)}
 				</Link>
 
-				<ul role="list" className={style["nav-links"]}>
+				<ul role="list" className="nav-links">
 					{navItems.map((item) => {
 						const active = isLinkActive(item.href);
 						return (
 							<li key={item.href}>
 								<Link
 									href={item.href}
-									className={active ? style.active : ""}
+									className={`nav-link ${active ? "active" : ""}`}
 									aria-current={active ? "page" : undefined}
 								>
 									{item.title}
@@ -55,14 +55,10 @@ const Nav = ({ companyData }: Props) => {
 					})}
 				</ul>
 
-				<Link href={APP_URL} className={style.mensaje} prefetch={false}>
-					Acceso
-				</Link>
-
 				<button
 					ref={toggleRef}
 					type="button"
-					className={`${style["nav-toggle"]} ${isMenuOpen ? style.active : ""}`}
+					className={`nav-toggle ${isMenuOpen ? "active" : ""}`}
 					aria-controls="mobile-menu"
 					aria-expanded={isMenuOpen}
 					onClick={toggleMenu}
@@ -75,8 +71,8 @@ const Nav = ({ companyData }: Props) => {
 
 			<div
 				ref={menuRef}
-				id={style["mobile-menu"]}
-				className={`${style["mobile-menu"]} ${isMenuOpen ? style.active : ""}`}
+				id="mobile-menu"
+				className={`mobile-menu ${isMenuOpen ? "active" : ""}`}
 			>
 				<ul role="list">
 					{navItems.map((item) => {
@@ -85,7 +81,7 @@ const Nav = ({ companyData }: Props) => {
 							<li key={item.href}>
 								<Link
 									href={item.href}
-									className={active ? style.active : ""}
+									className={`mobile-link ${active ? "active" : ""}`}
 									aria-current={active ? "page" : undefined}
 									onClick={closeMenu}
 								>
@@ -94,11 +90,6 @@ const Nav = ({ companyData }: Props) => {
 							</li>
 						);
 					})}
-					<li>
-						<Link href={APP_URL} className={style.mensaje} prefetch={false}>
-							Acceso
-						</Link>
-					</li>
 				</ul>
 			</div>
 		</header>

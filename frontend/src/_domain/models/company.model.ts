@@ -19,8 +19,8 @@ export class CompanyModel extends BaseModel {
         string_line_general_slogan: string;
     };
     public location!: {
-        string_line_location_latitude: string;
-        string_line_location_longitude: string;
+        string_line_location_latitude: number;
+        string_line_location_longitude: number;
         url_location_googleMaps: string;
     };
     public policy!: {
@@ -28,6 +28,7 @@ export class CompanyModel extends BaseModel {
     };
     public social!: {
         arr_list: {
+            _key?: string;
             icon_social_icon: Image;
             string_line_social_name: string;
             url_social_url: string;
@@ -55,15 +56,22 @@ export class CompanyModel extends BaseModel {
                 string_line_general_slogan: this.safeString(data?.general?.string_line_general_slogan),
             },
             location: {
-                string_line_location_latitude: this.safeString(data?.location?.string_line_location_latitude),
-                string_line_location_longitude: this.safeString(data?.location?.string_line_location_longitude),
+                string_line_location_latitude: this.safeNumber(data?.location?.string_line_location_latitude),
+                string_line_location_longitude: this.safeNumber(data?.location?.string_line_location_longitude),
                 url_location_googleMaps: this.safeString(data?.location?.url_location_googleMaps),
             },
             policy: {
                 list_block_post_policy_privacyNotice: this.safeBlockText(data?.policy?.list_block_post_policy_privacyNotice),
             },
             social: {
-                arr_list: this.safeString(data?.social?.arr_list),
+            arr_list: Array.isArray(data?.social?.arr_list)
+                ? data.social.arr_list.map((item: any) => ({
+                    _key: this.safeString(item?._key),
+                    icon_social_icon: this.safeImage(item?.icon_social_icon),
+                    string_line_social_name: this.safeString(item?.string_line_social_name),
+                    url_social_url: this.safeString(item?.url_social_url),
+                }))
+                : [],
             },
         }); 
     }

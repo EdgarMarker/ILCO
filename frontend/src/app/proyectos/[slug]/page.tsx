@@ -5,6 +5,8 @@ import CustomPortableText from "@/common/components/portable-text/CustomPortable
 import { createMetadata } from "@/common/utils/helper-seo";
 import { serialize } from "@/common/utils/helper-serialize";
 import ProductGallerySection from "../components/ProductGallerySection";
+import "./page.css";
+import Link from "next/link";
 
 interface Props {
 	params: {
@@ -23,7 +25,7 @@ const page = async ({ params }: Props) => {
 	const data = new ProductModel(rawData);
 
 	return (
-		<>
+		<main id="ProjectDetail">
 			{/**hero */}
 			<section className="section__hero">
 				<ResponsiveImage
@@ -31,21 +33,17 @@ const page = async ({ params }: Props) => {
 					variant="hero"
 				/>
 				<div className="column__1">
-					<div className="scrub">
-						<span>
-							<a href="/proyectos">PROYECTOS</a>
-						</span>
-						/
-						<span>
-							<a
-								href={`/proyectos/${data.general.ref_productCategory.slug.current}`}
-							>
+					<div className="proyect__title">
+						<span className="breadcrumbs">
+							<Link href="/proyectos">Proyectos</Link>
+							/
+							<Link href={`/proyectos/categorias/${data.general.ref_productCategory.slug.current}`}>
 								{data.general.ref_productCategory.string_line_category_name}
-							</a>
+							</Link>
 						</span>
+						<h1>{data.general.string_line_general_title}</h1>
 					</div>
-
-					<h1>{data.general.string_line_general_title}</h1>
+					
 				</div>
 			</section>
 
@@ -59,10 +57,13 @@ const page = async ({ params }: Props) => {
 						/>
 					</div>
 					<div className="col__right">
-						<CustomPortableText
-							hasImg={false}
-							data={data.general.list_block_title_general_description}
-						/>
+						<div className="portable__wrapper">
+							<h3>Descripción</h3>
+							<CustomPortableText
+								hasImg={false}
+								data={data.general.list_block_title_general_description}
+							/>
+						</div>
 					</div>
 				</div>
 			</section>
@@ -71,6 +72,7 @@ const page = async ({ params }: Props) => {
 			<section className="section__solution">
 				<div className="column__2">
 					<div className="col__left">
+						<h3>Solución</h3>
 						<CustomPortableText
 							hasImg={false}
 							data={data.page.list_block_title_page_solution}
@@ -99,16 +101,14 @@ const page = async ({ params }: Props) => {
             <section className="section__result">
                 <div className="column__2">
                     <div className="col__left">
+						<h3>Resultado</h3>
                         <CustomPortableText
                             hasImg={false}
                             data={data.page.list_block_title_page_result}
                         />
                     </div>
                     <div className="col__right">
-                        <CustomPortableText
-                            hasImg={false}
-                            data={data.page.list_block_title_page_result}
-                        />
+						<p>{data.page.string_textarea_page_result}</p>
                         {data.page.bool_page_result ? (
                             <ResponsiveImage
                                 imageData={data.page.img_page_resultImage}
@@ -123,7 +123,7 @@ const page = async ({ params }: Props) => {
 
             {/** GALLERY */}
             <ProductGallerySection productData={serialize(data)} />
-		</>
+		</main>
 	);
 };
 

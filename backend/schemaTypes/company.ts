@@ -1,5 +1,5 @@
 import { createSection } from "../utils/helper-createSection";
-import { image, listBlockText, stringText, url } from "./modules/modules";
+import { image, number, listBlockText, stringText, url } from "./modules/modules";
 
 const SECTIONS = [
 	{
@@ -74,14 +74,12 @@ const SECTIONS = [
 				purpose: "googleMaps",
 				title: "Enlace de dirección a Google Maps",
 			}),
-			stringText({
-				type: "line",
+			number({
 				title: "Latitud de la ubicación en Google Maps",
 				context: "location",
 				purpose: "latitude",
 			}),
-			stringText({
-				type: "line",
+			number({
 				title: "Longitud de la ubicación en Google Maps",
 				context: "location",
 				purpose: "longitude",

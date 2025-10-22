@@ -1,6 +1,7 @@
 "use client";
 // @ts-ignore
 import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/react-splide/css";
 import { useRef } from "react";
 import type { AboutPageModel } from "@/_domain/models/about-page.model";
 import CustomPortableText from "@/common/components/portable-text/CustomPortableText";
@@ -24,7 +25,7 @@ const AboutValuesSection = ({ aboutData }: Props) => {
 	const splideOptions = {
 		arrows: false,
 		pagination: false,
-		perPage: 3,
+		perPage: 1,
 		gap: "1rem",
 		breakpoints: {
 			768: {
@@ -43,7 +44,7 @@ const AboutValuesSection = ({ aboutData }: Props) => {
 					/>
 				</div>
 				<div className="col__right">
-					<div className="slider-nav">
+					<div className="slider__nav">
 						<button
 							type="submit"
 							onClick={goToPrev}
@@ -58,30 +59,27 @@ const AboutValuesSection = ({ aboutData }: Props) => {
 					</div>
 				</div>
 			</div>
-
-			<Splide ref={splideRef} options={splideOptions}>
-				{aboutData.values.list_values.map((item, idx) => (
-					<SplideSlide key={idx ?? ""}>
-						<div className="column__3">
-							<div className="col__left">
-								<span>{idx + 1}</span>
-								<h4>{item.string_line_values_title}</h4>
-							</div>
-							<div className="col__center">
+			<div className="column__1">
+				<Splide ref={splideRef} options={splideOptions}>
+					{aboutData.values.list_values.map((item, idx) => (
+						<SplideSlide key={idx ?? ""}>
+							<div className="column__1">
+								<div className="block__title">
+									<h3>{idx + 1}<span> / </span>{aboutData.values.list_values.length}</h3>
+									<h4>{item.string_line_values_title}</h4>
+								</div>
 								<ResponsiveImage
 									imageData={item.img_values_image}
 									variant="card"
 								/>
+								<div className="block__description">
+									<p>{item.string_textarea_values_description}</p>
+								</div>
 							</div>
-							<div className="col__right">
-								<blockquote>
-									{item.string_textarea_values_description}
-								</blockquote>
-							</div>
-						</div>
-					</SplideSlide>
-				))}
-			</Splide>
+						</SplideSlide>
+					))}
+				</Splide>
+			</div>
 		</section>
 	);
 };

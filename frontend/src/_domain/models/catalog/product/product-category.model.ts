@@ -19,7 +19,7 @@ export class ProductCategoryModel extends BaseModel {
 			slug: this.safeSlug(data?.slug),
 			string_line_category_name: this.safeString(
 				data?.string_line_category_name,
-			).toUpperCase(),
+			),
 		});
 	}
 }

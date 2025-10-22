@@ -1,6 +1,6 @@
 export const NAV_ITEMS = [
 	{
-		title: "Home",
+		title: "Inicio",
 		href: "/",
 	},
 	{

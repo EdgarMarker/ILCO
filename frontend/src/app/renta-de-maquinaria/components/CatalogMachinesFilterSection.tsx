@@ -56,19 +56,23 @@ const CatalogFilterSection = ({ dataPage, categories }: Props) => {
 					/>
 				</div>
 				<div className="col__right">
-					Filtrado por tipos de Maquina:
-					<select
-						value={category}
-						onChange={(e) => setCategory(e.target.value)}
-						disabled={loading}
-					>
-						<option value="all">SELECCIONE UNA OPCIÓN</option>
-						{categories.map((cat) => (
-							<option key={cat._id} value={cat.slug.current}>
-								{cat.string_line_category_name}
-							</option>
-						))}
-					</select>
+					<label htmlFor="filterMachines">
+						Filtrar por tipo de máquina:{" "}
+						<select
+							id="filterMachines"
+							name="filterMachines"
+							value={category}
+							onChange={(e) => setCategory(e.target.value)}
+							disabled={loading}
+						>
+							<option value="all">Seleccione una opción</option>
+							{categories.map((cat) => (
+								<option key={cat._id} value={cat.slug.current}>
+									{cat.string_line_category_name}
+								</option>
+							))}
+						</select>
+					</label>
 				</div>
 			</div>
 
@@ -77,42 +81,44 @@ const CatalogFilterSection = ({ dataPage, categories }: Props) => {
 					<div>Cargando máquinas...</div>
 				) : (
 					<>
-						{currentMachines.map((machine, idx) => (
-							<MachineCard key={idx ?? ""} data={machine} variant="primary" />
-						))}
+						<ul role="list" className="listado">
+							{currentMachines.map((machine, idx) => (
+								<MachineCard key={idx ?? ""} data={machine} variant="primary" />
+							))}
 
-						{totalPages > 1 && (
-							<div className="pagination">
-								<button
-									type="submit"
-									onClick={() => setPage(page - 1)}
-									disabled={page === 1}
-								>
-									‹
-								</button>
+							{totalPages > 1 && (
+								<div className="pagination">
+									<button
+										type="submit"
+										onClick={() => setPage(page - 1)}
+										disabled={page === 1}
+									>
+										‹
+									</button>
 
-								{Array.from({ length: totalPages }, (_, i) => i + 1).map(
-									(num) => (
-										<button
-											type="submit"
-											key={num}
-											onClick={() => setPage(num)}
-											className={page === num ? "active" : ""}
-										>
-											{num}
-										</button>
-									),
-								)}
+									{Array.from({ length: totalPages }, (_, i) => i + 1).map(
+										(num) => (
+											<button
+												type="submit"
+												key={num}
+												onClick={() => setPage(num)}
+												className={page === num ? "active" : ""}
+											>
+												{num}
+											</button>
+										),
+									)}
 
-								<button
-									type="submit"
-									onClick={() => setPage(page + 1)}
-									disabled={page === totalPages}
-								>
-									›
-								</button>
-							</div>
-						)}
+									<button
+										type="submit"
+										onClick={() => setPage(page + 1)}
+										disabled={page === totalPages}
+									>
+										›
+									</button>
+								</div>
+							)}
+						</ul>
 					</>
 				)}
 			</div>

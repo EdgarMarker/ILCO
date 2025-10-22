@@ -1,0 +1,277 @@
+#Machines{
+  
+    .section__hero{
+        padding: 100px 0% 0;
+        .column__2{
+            .col__left{
+                background-color: var(--color-secondary-dark);
+                padding: calc(5% + 7vh) 10% 5% 5%;
+                justify-content: center;
+                &::before{
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    width: 100%;
+                    height: 7vh;
+                    background-color: var(--color-gray);
+                    top: -3px;
+                    left: 0;
+                }
+                h1{
+                    color: var(--color-black);
+                }
+                h2{
+                    color: var(--color-black);
+                }
+                p{
+                    color: var(--color-black);
+                }
+            }
+            .col__right{
+                position: relative;
+                video{
+                aspect-ratio: 1.25;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                filter: grayscale();
+                }
+                .subject{
+                position: absolute;
+                height: 95%;
+                width: auto;
+                bottom: -10%;
+                left: -25%;
+                z-index: 1;
+                }
+            }
+        }
+    }
+
+    .section__projects{
+        padding: 8% 5%;
+        .column__2{
+            .col__left{
+                .portableText{
+                    h3{
+                        text-transform: uppercase;
+                        font-size: var(--size-sm);
+                        font-weight: 300;
+                    }
+                    h2{
+                        margin-bottom: 0;
+                    }
+                }
+            }
+            .col__right{
+                flex-direction: row;
+                align-items: flex-end;
+                justify-content: flex-end;
+                label{
+                    font-size: var(--size-sm);
+                    color: var(--color-black);
+                    select{
+                        font-size: var(--size-sm);
+                        padding: 0.4em 0.5em;
+                        &:focus{
+                            outline: none;
+                        }
+                    }
+                }
+            }
+        }
+        .column__1{
+            padding-top: 5vh;
+        }
+    }
+
+    .card{
+        height: 100%;
+        .card__header{
+            a{
+                width: auto;
+                height: auto;
+                margin-bottom: 0;
+                display: block;
+                line-height: 0;
+                position: relative;
+                img{
+                    aspect-ratio: 1.6;
+                }
+            }
+        }
+        .card__body{
+            background-color: var(--color-white);
+            padding: 5%;
+            .card__description{
+                border-left: 0.2em solid var(--color-secondary);
+                padding-left: 0.8em;
+                .card__cat{
+                    display: block;
+                    font-size: var(--size-xs);
+                    text-decoration: none;
+                    text-transform: uppercase;
+                    color: var(--color-black);
+                    &:hover{
+                        text-decoration: underline;
+                    }
+                }
+            }
+            
+            .card__title{
+                display: block;
+                font-weight: 600;
+                text-transform: uppercase;
+                margin-bottom: 0.2em;
+                text-decoration: none;
+                font-size: var(--size-lg);
+                line-height: 1.2;
+                color: var(--color-black);
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                &:hover{
+                    text-decoration: underline;
+                }
+            }
+        }
+        .btn{
+            width: 100%;
+
+            &::before{
+                background-color: var(--color-gray);
+            }
+        }
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  Tableta  */
+@media only screen and (max-width: 1024px) {
+
+    #Machines{
+
+        .section__hero{
+            padding: 60px 0 0;
+            .column__2{
+                flex-direction: column-reverse;
+                .col__left{
+                    padding: 10% 5% 10%;
+                    &::before{
+                        display: none;
+                    }
+                }
+                .col__right{
+                    .subject{
+                        height: 95%;
+                        position: absolute;
+                        bottom: -8%;
+                        left: unset;
+                        right: 0%;
+                    }
+                }
+            }
+        }
+
+        .section__projects{
+            .column__2{
+                .col__right{
+                    align-items: flex-start;
+                    justify-content: flex-start;
+                    padding-top: 4%;
+                }
+            }
+            padding: 10% 5%;
+            .column__1{
+                ul.listado{
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+        }
+
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  Móvil  */
+@media only screen and (max-width: 768px) {
+
+  #Machines{
+
+    .section__projects{
+        padding: 15% 5%;
+        .column__2{
+            .col__right{
+                label{
+                    select{
+                        margin-top: 5px;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+        .column__1{
+            ul.listado{
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+    }
+
+    .section__machines{
+      .col__left{
+        padding: 15% 5% !important;
+      }
+    }
+
+  }
+
+}

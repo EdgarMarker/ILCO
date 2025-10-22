@@ -43,7 +43,7 @@ const ProductGallerySection = ({ productData }: Props) => {
 					/>
 				</div>
 				<div className="col__right">
-					<div className="slider-nav">
+					<div className="slider__nav">
 						<button
 							type="submit"
 							onClick={goToPrev}

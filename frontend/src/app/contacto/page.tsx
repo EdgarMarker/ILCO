@@ -6,6 +6,10 @@ import CustomPortableText from "@/common/components/portable-text/CustomPortable
 import { createMetadata } from "@/common/utils/helper-seo";
 import { getCompanyData } from "@/_domain/services/company.services";
 import { CompanyModel } from "@/_domain/models/company.model";
+import "./page.css"
+import HubspotForm from "@/common/components/forms/HubspotForm";
+import GoogleMap from "@/common/components/googlemaps/GoogleMap";
+import { MapStyles } from "@/common/components/googlemaps/MapStyles";
 
 export const generateMetadata = async () => {
 	const rawData = await getContactPageData();
@@ -19,8 +23,10 @@ const page = async () => {
 
 	const data = new ContactPageModel(rawData);
 	const companyData = new CompanyModel(rawCompanyData);
+
+	const center = { lat:`${companyData.location.string_line_location_latitude}`, lng: `${companyData.location.string_line_location_longitude}` }; // Mérida (ejemplo)
 	return (
-		<>
+		<main id="Contact">
 			<section className="section__hero">
 				<div className="column__2">
 					<div className="col__left">
@@ -31,13 +37,14 @@ const page = async () => {
 						/>
 					</div>
 					<div className="col__right">
-						<ResponsiveImage
-							imageData={data.hero.img_hero_banner}
-							variant="hero"
-						/>
+						<video width="1920" height="1080" autoPlay muted preload="none" loop>
+							<source src="/videos/prueba.mp4" type="video/mp4" />
+							Tu navegador no soporta la etiqueta de video.
+						</video>
 						<ResponsiveImage
 							imageData={data.hero.img_hero_png}
 							variant="banner"
+							className="subject"
 						/>
 					</div>
 				</div>
@@ -46,23 +53,47 @@ const page = async () => {
 			<section className="section__contact">
 				<div className="column__2">
 					<div className="col__left">
-						<h3>Contacto</h3>
-						<h2>CONTÁCTANOS PARA RECIBIR MÁS INFORMACIÓN</h2>
+						<h3>Datos de contacto</h3>
+						<h2>Contáctanos para recibir más información</h2>
 
-						<a href={`tel:${companyData.contact.string_line_contact_phone}`}>
-							{companyData.contact.string_line_contact_phone}
-						</a>
-						<a href={`mailto:${companyData.contact.string_line_contact_email}`}>
-							{companyData.contact.string_line_contact_email}
-						</a>
-						<a href={companyData.location.url_location_googleMaps}>
-							{companyData.contact.string_line_contact_address}
-						</a>
+						<ul role="list">
+							<li>
+								<a href={`tel:${companyData.contact.string_line_contact_phone}`}>
+									{companyData.contact.string_line_contact_phone}
+								</a>
+							</li>
+							<li>
+								<a href={`mailto:${companyData.contact.string_line_contact_email}`}>
+									{companyData.contact.string_line_contact_email}
+								</a>
+							</li>
+							<li>
+								<a href={companyData.location.url_location_googleMaps}>
+									{companyData.contact.string_line_contact_address}
+								</a>
+							</li>
+						</ul>
 					</div>
-					<div className="col__right"></div>
+					<div className="col__right">
+						<HubspotForm />
+					</div>
 				</div>
 			</section>
-		</>
+
+			<section className="section__map">
+				<div className="column__1">
+					<GoogleMap
+					center={center}
+					zoom={16}
+					styles={MapStyles}
+					markerIconUrl="/icons/pin.svg"
+					markerSize={56}
+					style={{ height: 500 }}
+					markerTitle="Oficinas"
+					/>
+				</div>
+			</section>
+		</main>
 	);
 };
 

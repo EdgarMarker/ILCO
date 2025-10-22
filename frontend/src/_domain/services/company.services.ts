@@ -31,7 +31,8 @@ export const COMPANY_FIELDS = `
     list_block_post_policy_privacyNotice
   },
   social {
-    arr_list[] {
+    arr_list[]{
+      _key,
       icon_social_icon {
         "media": asset -> { url },
         "alt": asset -> { altText }

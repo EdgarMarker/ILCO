@@ -7,6 +7,8 @@ import CustomPortableText from "@/common/components/portable-text/CustomPortable
 import { createMetadata } from "@/common/utils/helper-seo";
 import { serialize } from "@/common/utils/helper-serialize";
 import MachineGallerySlider from "../components/MachineGallerySlider";
+import "./page.css";
+import Link from "next/link";
 
 interface Props {
 	params: {
@@ -25,31 +27,30 @@ const page = async ({ params }: Props) => {
 	const data = new MachineModel(rawData);
 
 	return (
-		<>
+		<main id="MachineDetail">
 			{/* HERO */}
 			<section className="section__hero">
 				<div className="column__2">
 					<div className="col__left">
-						<div className="scrub">
-							<span>
-								<a href="/proyectos">RENTA DE MAQUINARIA</a>
-							</span>
-							/
-							<span>
-								<a
-									href={`/renta-de-maquinaria/${data.general.ref_machineCategory.slug.current}`}
-								>
-									{data.general.ref_machineCategory.string_line_category_name}
-								</a>
-							</span>
-						</div>
+						<span className="breadcrumbs">
+							<Link href="/renta-de-maquinaria">Renta de maquinaria</Link>
+							{" "}/{" "}
+							<Link
+								href={`/renta-de-maquinaria/categorias/${data.general.ref_machineCategory.slug.current}`}
+							>
+								{data.general.ref_machineCategory.string_line_category_name}
+							</Link>
+						</span>
 						<h1>{data.general.string_line_general_title}</h1>
-						<ScrollButton type="secondary" scrollTo="#intro">
-							Solicitar Cotización
-						</ScrollButton>
-						<a href={data.general.file_general_brochure}>
-							Descargar Folleto (PDF)
-						</a>
+						<div className="btn__wrapper">
+							<ScrollButton type="secondary" scrollTo="#intro">
+								Solicitar Cotización
+							</ScrollButton>
+							<a className="btn" href={data.general.file_general_brochure} target="_blank">
+								Descargar ficha técnica
+							</a>
+						</div>
+						
 					</div>
 
 					<div className="col__right">
@@ -80,16 +81,15 @@ const page = async ({ params }: Props) => {
 						hasImg={false}
 						data={data.page.list_block_title_page_specifications}
 					/>
+					<ul role="list" className="listado">
+						{data.page.list_obj_specifications.map((spec, idx) => (
+							<li key={idx ?? ""}>
+								<strong>{spec.string_line_specification_title}</strong>
+								<span>{spec.string_line_specification_value}</span>
+							</li>
+						))}
+					</ul>
 				</div>
-
-				<ul>
-					{data.page.list_obj_specifications.map((spec, idx) => (
-						<li key={idx ?? ""}>
-							<strong>{spec.string_line_specification_title}</strong>
-							<span>{spec.string_line_specification_value}</span>
-						</li>
-					))}
-				</ul>
 			</section>
 
 			{/* DIVIDER IMAGE */}
@@ -103,7 +103,7 @@ const page = async ({ params }: Props) => {
 			</section>
 
 
-		</>
+		</main>
 	);
 };
 
