@@ -12,6 +12,7 @@ import { serialize } from "@/common/utils/helper-serialize";
 import { getAllPostCategories } from "@/_domain/services/blog/post/post.services";
 import { PostCategoryModel } from "@/_domain/models/blog/post/post-category.model";
 import "./page.css";
+import PreFooter from "@/common/components/footer/PreFooter";
 
 export const generateMetadata = async () => {
 	const rawData = await getBlogPageData();
@@ -64,6 +65,7 @@ const page = async () => {
 
 			{/** BLOG FILTER SECTION */}
 			<BlogFilterSection blogPage={serialize(data)} categories={serialize(allPostCategories)} />
+			<PreFooter />
 		</main>
 	);
 };

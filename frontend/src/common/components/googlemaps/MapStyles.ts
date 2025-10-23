@@ -7,7 +7,7 @@ export const MapStyles: google.maps.MapTypeStyle[] = [
                 "saturation": 36
             },
             {
-                "color": "#000000"
+                "color": "#0a0a0b"
             },
             {
                 "lightness": 40
@@ -22,7 +22,7 @@ export const MapStyles: google.maps.MapTypeStyle[] = [
                 "visibility": "on"
             },
             {
-                "color": "#000000"
+                "color": "#0a0a0b"
             },
             {
                 "lightness": 16
@@ -43,7 +43,7 @@ export const MapStyles: google.maps.MapTypeStyle[] = [
         "elementType": "geometry.fill",
         "stylers": [
             {
-                "color": "#000000"
+                "color": "#0a0a0b"
             },
             {
                 "lightness": 20
@@ -55,7 +55,7 @@ export const MapStyles: google.maps.MapTypeStyle[] = [
         "elementType": "geometry.stroke",
         "stylers": [
             {
-                "color": "#000000"
+                "color": "#0a0a0b"
             },
             {
                 "lightness": 17
@@ -70,7 +70,7 @@ export const MapStyles: google.maps.MapTypeStyle[] = [
         "elementType": "geometry",
         "stylers": [
             {
-                "color": "#000000"
+                "color": "#0a0a0b"
             },
             {
                 "lightness": 20
@@ -82,7 +82,7 @@ export const MapStyles: google.maps.MapTypeStyle[] = [
         "elementType": "geometry",
         "stylers": [
             {
-                "color": "#000000"
+                "color": "#0a0a0b"
             },
             {
                 "lightness": 21
@@ -94,7 +94,7 @@ export const MapStyles: google.maps.MapTypeStyle[] = [
         "elementType": "geometry.fill",
         "stylers": [
             {
-                "color": "#000000"
+                "color": "#0a0a0b"
             },
             {
                 "lightness": 17
@@ -106,7 +106,7 @@ export const MapStyles: google.maps.MapTypeStyle[] = [
         "elementType": "geometry.stroke",
         "stylers": [
             {
-                "color": "#000000"
+                "color": "#0a0a0b"
             },
             {
                 "lightness": 29
@@ -121,7 +121,7 @@ export const MapStyles: google.maps.MapTypeStyle[] = [
         "elementType": "geometry",
         "stylers": [
             {
-                "color": "#000000"
+                "color": "#0a0a0b"
             },
             {
                 "lightness": 18
@@ -133,7 +133,7 @@ export const MapStyles: google.maps.MapTypeStyle[] = [
         "elementType": "geometry",
         "stylers": [
             {
-                "color": "#000000"
+                "color": "#0a0a0b"
             },
             {
                 "lightness": 16
@@ -145,7 +145,7 @@ export const MapStyles: google.maps.MapTypeStyle[] = [
         "elementType": "geometry",
         "stylers": [
             {
-                "color": "#000000"
+                "color": "#0a0a0b"
             },
             {
                 "lightness": 19
@@ -157,7 +157,7 @@ export const MapStyles: google.maps.MapTypeStyle[] = [
         "elementType": "geometry",
         "stylers": [
             {
-                "color": "#000000"
+                "color": "#0a0a0b"
             },
             {
                 "lightness": 17

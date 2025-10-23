@@ -24,7 +24,10 @@ const page = async () => {
 	const data = new ContactPageModel(rawData);
 	const companyData = new CompanyModel(rawCompanyData);
 
-	const center = { lat:`${companyData.location.string_line_location_latitude}`, lng: `${companyData.location.string_line_location_longitude}` }; // Mérida (ejemplo)
+	const center = {
+		lat: companyData.location.number_location_latitude,   // number
+		lng: companyData.location.number_location_longitude,  // number
+	};
 	return (
 		<main id="Contact">
 			<section className="section__hero">
@@ -84,12 +87,12 @@ const page = async () => {
 				<div className="column__1">
 					<GoogleMap
 					center={center}
-					zoom={16}
-					styles={MapStyles}
+					zoom={14}
 					markerIconUrl="/icons/pin.svg"
 					markerSize={56}
-					style={{ height: 500 }}
+					styles={MapStyles}
 					markerTitle="Oficinas"
+					className="mapa"
 					/>
 				</div>
 			</section>

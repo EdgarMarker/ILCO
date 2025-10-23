@@ -12,7 +12,7 @@ export const NAV_ITEMS = [
 		href: "/proyectos",
 	},
 	{
-		title: "Renta de maquinaría",
+		title: "Renta de maquinaria",
 		href: "/renta-de-maquinaria",
 	},
     {

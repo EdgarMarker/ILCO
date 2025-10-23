@@ -19,8 +19,8 @@ export class CompanyModel extends BaseModel {
         string_line_general_slogan: string;
     };
     public location!: {
-        string_line_location_latitude: number;
-        string_line_location_longitude: number;
+        number_location_latitude: number;
+        number_location_longitude: number;
         url_location_googleMaps: string;
     };
     public policy!: {
@@ -56,8 +56,8 @@ export class CompanyModel extends BaseModel {
                 string_line_general_slogan: this.safeString(data?.general?.string_line_general_slogan),
             },
             location: {
-                string_line_location_latitude: this.safeNumber(data?.location?.string_line_location_latitude),
-                string_line_location_longitude: this.safeNumber(data?.location?.string_line_location_longitude),
+                number_location_latitude: this.safeNumber(data?.location?.number_location_latitude),
+                number_location_longitude: this.safeNumber(data?.location?.number_location_longitude),
                 url_location_googleMaps: this.safeString(data?.location?.url_location_googleMaps),
             },
             policy: {

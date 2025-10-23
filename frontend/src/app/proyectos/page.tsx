@@ -9,6 +9,7 @@ import { createMetadata } from "@/common/utils/helper-seo";
 import { serialize } from "@/common/utils/helper-serialize";
 import CatalogFilterSection from "./components/CatalogFilterSection";
 import "./page.css";
+import PreFooter from "@/common/components/footer/PreFooter";
 
 export const generateMetadata = async () => {
 	const rawData = await getCatalogPageData();
@@ -83,6 +84,7 @@ const page = async () => {
 					</div>
 				</div>
 			</section>
+			<PreFooter />
 		</main>
 	);
 };

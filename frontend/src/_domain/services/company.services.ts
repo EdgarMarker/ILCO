@@ -23,8 +23,8 @@ export const COMPANY_FIELDS = `
     string_line_general_slogan
   },
   location {
-    string_line_location_latitude,
-    string_line_location_longitude,
+    number_location_latitude,
+    number_location_longitude,
     url_location_googleMaps
   },
   policy {

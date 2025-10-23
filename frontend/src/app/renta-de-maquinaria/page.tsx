@@ -8,6 +8,7 @@ import { createMetadata } from "@/common/utils/helper-seo";
 import { serialize } from "@/common/utils/helper-serialize";
 import CatalogMachinesFilterSection from "./components/CatalogMachinesFilterSection";
 import "./page.css";
+import PreFooter from "@/common/components/footer/PreFooter";
 
 export const generateMetadata = async () => {
 	const rawData = await getCatalogMachinesPageData();
@@ -55,6 +56,7 @@ const page = async () => {
 				dataPage={serialize(data)}
 				categories={serialize(allMachineCategories)}
 			/>
+			<PreFooter />
 		</main>
 	);
 };

@@ -9,6 +9,7 @@ import { serialize } from "@/common/utils/helper-serialize";
 import MachineGallerySlider from "../components/MachineGallerySlider";
 import "./page.css";
 import Link from "next/link";
+import PreFooter from "@/common/components/footer/PreFooter";
 
 interface Props {
 	params: {
@@ -101,7 +102,7 @@ const page = async ({ params }: Props) => {
 					/>
 				</div>
 			</section>
-
+			<PreFooter />
 
 		</main>
 	);

@@ -10,6 +10,7 @@ import { BUTTONS_TEXT } from "@/common/utils/constants-text";
 import AboutValuesSection from "./components/AboutValuesSection";
 import { serialize } from "@/common/utils/helper-serialize";
 import "./page.css";
+import PreFooter from "@/common/components/footer/PreFooter";
 
 export const generateMetadata = async () => {
 	const rawData = await getAboutPageData();
@@ -140,6 +141,7 @@ const page = async () => {
 					</div>
 				</div>
 			</section>
+			<PreFooter />
 		</main>
 	);
 };

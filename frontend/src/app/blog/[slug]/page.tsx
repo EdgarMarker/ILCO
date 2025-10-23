@@ -10,6 +10,7 @@ import ResponsiveImage from "@/common/components/images/ResponsiveImage";
 import CustomPortableText from "@/common/components/portable-text/CustomPortableText";
 import { createMetadata } from "@/common/utils/helper-seo";
 import "./page.css";
+import PreFooter from "@/common/components/footer/PreFooter";
 
 interface Props {
 	params: {
@@ -86,6 +87,7 @@ const page = async ({ params }: Props) => {
 					</div>
 				</div>
 			</section>
+			<PreFooter />
 		</main>
 	);
 };

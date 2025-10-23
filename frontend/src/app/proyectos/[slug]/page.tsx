@@ -7,6 +7,7 @@ import { serialize } from "@/common/utils/helper-serialize";
 import ProductGallerySection from "../components/ProductGallerySection";
 import "./page.css";
 import Link from "next/link";
+import PreFooter from "@/common/components/footer/PreFooter";
 
 interface Props {
 	params: {
@@ -123,6 +124,7 @@ const page = async ({ params }: Props) => {
 
             {/** GALLERY */}
             <ProductGallerySection productData={serialize(data)} />
+			<PreFooter />
 		</main>
 	);
 };

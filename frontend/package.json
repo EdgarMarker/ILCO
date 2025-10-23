@@ -10,7 +10,7 @@
     "format": "biome format --write"
   },
   "dependencies": {
-    "@googlemaps/js-api-loader": "^2.0.1",
+    "@googlemaps/js-api-loader": "^1.16.8",
     "@gsap/react": "2.1.2",
     "@portabletext/react": "4.0.1",
     "@splidejs/react-splide": "^0.7.12",
