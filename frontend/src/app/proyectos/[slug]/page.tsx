@@ -47,7 +47,7 @@ const page = async ({ params }: Props) => {
 						<span className="breadcrumbs">
 							<Link href="/proyectos">Proyectos</Link>/
 							<Link
-								href={`/proyectos/categorias/${data.general.ref_productCategory.slug.current}`}
+								href={`/proyectos/categoria/${data.general.ref_productCategory.slug.current}`}
 							>
 								{data.general.ref_productCategory.string_line_category_name}
 							</Link>

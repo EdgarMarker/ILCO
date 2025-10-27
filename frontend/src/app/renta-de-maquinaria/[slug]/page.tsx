@@ -37,7 +37,7 @@ const page = async ({ params }: Props) => {
 							<Link href="/renta-de-maquinaria">Renta de maquinaria</Link>
 							{" "}/{" "}
 							<Link
-								href={`/renta-de-maquinaria/categorias/${data.general.ref_machineCategory.slug.current}`}
+								href={`/renta-de-maquinaria/categoria/${data.general.ref_machineCategory.slug.current}`}
 							>
 								{data.general.ref_machineCategory.string_line_category_name}
 							</Link>
