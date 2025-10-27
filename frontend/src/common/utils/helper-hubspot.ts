@@ -72,7 +72,6 @@ const baseSchema = {
   lastname: z.string().min(2, "El apellido debe tener al menos 2 caracteres"),
   email: z.string().email("Por favor ingresa un email válido"),
   phone: z.string().min(10, "El teléfono debe tener al menos 10 dígitos"),
-  city: z.string().min(2, "La ciudad debe tener al menos 2 caracteres"),
   message: z.string().optional(),
 };
 
@@ -80,54 +79,36 @@ const baseSchema = {
 const createFormConfig = (
   id: string,
   customFields: FormField[] = [],
-  customSchema: Record<string, z.ZodTypeAny> = {}
-): FormConfig => ({
-  id,
-  fields: [
-    baseFields.firstname,
-    baseFields.lastname,
-    baseFields.email,
-    baseFields.phone,
-    baseFields.city,
-    ...customFields,
-    baseFields.message,
-  ],
-  schema: z.object({ ...baseSchema, ...customSchema }),
-});
+  customSchema: Record<string, z.ZodTypeAny> = {},
+  includeBase = true,
+): FormConfig => {
+  const fields = includeBase
+    ? [
+        baseFields.firstname,
+        baseFields.lastname,
+        baseFields.email,
+        baseFields.phone,
+        ...customFields,
+        baseFields.message,
+      ]
+    : [...customFields];
+
+  const schema = includeBase
+    ? z.object({ ...baseSchema, ...customSchema })
+    : z.object({ ...customSchema }); 
+
+  return {
+    id,
+    fields,
+    schema,
+  };
+};
 
 // FORM INSTANCES
 export const FORM_INSTANCES = {
-  get CONTACT() {
-    return createFormConfig("contact_form", [
-      {
-        name: "interest",
-        hubspotName: "interest",
-        required: true,
-        label: "Interesado en",
-        type: "select",
-        options: [
-          { value: "option_1", label: "Propiedades en venta" },
-          { value: "option_2", label: "Propiedades en renta" },
-          { value: "option_3", label: "Atención a foráneos" },
-        ],
-      },
-    ], {
-      interest: z.string().min(1, "Por favor selecciona una opción"),
-    });
-  },
-  get PRODUCT() {
-    return createFormConfig("product_form", [
-      {
-        name: "id_propiedad",
-        hubspotName: "id_propiedad",
-        required: true,
-        label: "ID del Producto",
-        type: "text",
-      },
-    ], {
-      id_propiedad: z.string().min(2, "El ID del producto debe tener al menos 2 caracteres"),
-    });
-  },
-};
 
+  get CONTACT () {
+    return createFormConfig("contact_form");
+  }
+};
 export const createFormInstance = createFormConfig;

@@ -5,127 +5,135 @@ import { z } from 'zod';
 import type { FormConfig } from "@/common/utils/helper-hubspot";
 
 interface SubmissionState {
-	isSubmitting: boolean;
-	isSuccess: boolean;
-	isError: boolean;
-	errorMessage?: string;
-	shouldRedirect: boolean;
+    isSubmitting: boolean;
+    isSuccess: boolean;
+    isError: boolean;
+    errorMessage?: string;
+    shouldRedirect: boolean;
 }
 
 const useHubspotForm = (formConfig: FormConfig) => {
-	const [submissionState, setSubmissionState] = useState<SubmissionState>({
-		isSubmitting: false,
-		isSuccess: false,
-		isError: false,
-		shouldRedirect: false,
-	});
+    const [submissionState, setSubmissionState] = useState<SubmissionState>({
+        isSubmitting: false,
+        isSuccess: false,
+        isError: false,
+        shouldRedirect: false,
+    });
 
-	const methods = useForm();
-	const formName = formConfig.id.toUpperCase();
+    const methods = useForm();
+    const formName = formConfig.id.toUpperCase();
 
-	useEffect(() => {
-		if (typeof window === "undefined") return;
+    useEffect(() => {
+        if (typeof window === "undefined") return;
 
-		const isValid = formConfig.fields?.length > 0 && formConfig.schema;
-		console.log(
-			`${isValid ? "🟢" : "🔴"} [${formName}] ${isValid ? "Listo para enviar" : "Error en configuración"}`,
-		);
-	}, [formName, formConfig]);
+        const isValid = formConfig.fields?.length > 0 && formConfig.schema;
+        console.log(
+            `${isValid ? "🟢" : "🔴"} [${formName}] ${isValid ? "Listo para enviar" : "Error en configuración"}`,
+        );
+    }, [formName, formConfig]);
 
-	const updateState = (state: Partial<SubmissionState>) => {
-		setSubmissionState((prev) => ({ ...prev, ...state }));
-	};
+    const updateState = (state: Partial<SubmissionState>) => {
+        setSubmissionState((prev) => ({ ...prev, ...state }));
+    };
 
-	const launchToSpace = async (data: z.infer<typeof formConfig.schema>) => {
-		if (typeof window === "undefined") {
-			console.log("⚠️ Intento de envío durante SSR - abortando");
-			return;
-		}
+    const launchToSpace = async (data: z.infer<typeof formConfig.schema>) => {
+        if (typeof window === "undefined") {
+            console.log("⚠️ Intento de envío durante SSR - abortando");
+            return;
+        }
 
-		updateState({ isSubmitting: true, isSuccess: false, isError: false });
+        updateState({ isSubmitting: true, isSuccess: false, isError: false });
 
-		try {
-			const validatedData = formConfig.schema.parse(data);
-			console.log(`✅ [${formName}] Datos validados correctamente`);
+        let payload: Record<string, unknown> | null = null;
 
-			const payload = {
-				...(validatedData as Record<string, unknown>),
-				_formId: formConfig.id,
-			};
-			console.log(`🚀 [${formName}] Enviando formulario...`);
+        try {
+            const validatedData = formConfig.schema.parse(data);
+            console.log(`✅ [${formName}] Datos validados correctamente`);
 
-			const controller = new AbortController();
-			const timeoutId = setTimeout(() => controller.abort(), 15000);
+            payload = {
+                ...(validatedData as Record<string, unknown>),
+                _formId: formConfig.id,
+            };
+            console.log(`🚀 [${formName}] Enviando formulario...`, payload);
 
-			const response = await fetch("/api/hubspot-submit", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(payload),
-				signal: controller.signal,
-			});
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 15000);
 
-			clearTimeout(timeoutId);
-			console.log(`📡 [${formName}] Respuesta:`, {
-				status: response.status,
-				ok: response.ok,
-			});
+            const response = await fetch("/api/hubspot/submit", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+                signal: controller.signal,
+            });
 
-			if (response.ok) {
-				const result = await response.json();
-				console.log(`🎉 [${formName}] Misión exitosa`);
+            clearTimeout(timeoutId);
+            console.log(`📡 [${formName}] Respuesta:`, {
+                status: response.status,
+                ok: response.ok,
+            });
 
-				updateState({
-					isSubmitting: false,
-					isSuccess: true,
-					shouldRedirect: true,
-				});
+            if (response.ok) {
+                const result = await response.json();
+                console.log(`🎉 [${formName}] Misión exitosa`);
 
-				methods.reset();
-				return { success: true, data: result };
-			}
+                updateState({
+                    isSubmitting: false,
+                    isSuccess: true,
+                    shouldRedirect: true,
+                });
 
-			const errorData = await response.json().catch(() => ({
-				error: `HTTP ${response.status}: ${response.statusText}`,
-			}));
+                methods.reset();
+                return { success: true, data: result };
+            }
 
-			console.log(`💥 [${formName}] Error - Status: ${response.status}`);
-			throw new Error(errorData.error || `Error ${response.status}`);
-		} catch (error) {
-			let errorMessage = "Error desconocido";
+            const errorData = await response.json().catch(() => ({
+                error: `HTTP ${response.status}: ${response.statusText}`,
+            }));
 
-			if (error instanceof z.ZodError) {
-				errorMessage = `Errores de validación: ${error.issues.map((e) => e.message).join(", ")}`;
-				console.log(`💥 [${formName}] Error de validación:`, data);
-			} else if (error instanceof Error) {
-				errorMessage = error.message;
-				console.log(`💥 [${formName}] Error:`, error.message);
-			}
+            console.error(`💥 [${formName}] Error - Status: ${response.status}`, {
+                errorData,
+                payload,
+            });
+            throw new Error(errorData.error || `Error ${response.status}`);
+        } catch (error) {
+            let errorMessage = "Error desconocido";
 
-			updateState({
-				isSubmitting: false,
-				isError: true,
-				errorMessage,
-			});
+            if (error instanceof z.ZodError) {
+                errorMessage = `Errores de validación: ${error.issues.map((e) => e.message).join(", ")}`;
+                console.log(`💥 [${formName}] Error de validación:`, data);
+            } else if (error instanceof Error) {
+                errorMessage = error.message;
+                console.log(`💥 [${formName}] Error:`, error.message);
+            }
 
-			return { success: false, error: errorMessage };
-		}
-	};
+            updateState({
+                isSubmitting: false,
+                isError: true,
+                errorMessage,
+            });
 
-	const handleFormSubmit = (e?: React.FormEvent<HTMLFormElement>) => {
-		if (typeof window !== "undefined") {
-			methods.handleSubmit(launchToSpace)(e);
-		}
-	};
+            // Devuelve el payload junto al error para poder inspeccionarlo en local
+            return { success: false, error: errorMessage, payload };
+        }
+    };
 
-	return {
-		register: methods.register,
-		handleSubmit: handleFormSubmit,
-		formState: methods.formState,
-		submissionState,
-		fields: formConfig.fields,
-		formId: formConfig.id,
-		resetForm: methods.reset,
-	};
+    const handleFormSubmit = (e?: React.FormEvent<HTMLFormElement>) => {
+        if (typeof window !== "undefined") {
+            methods.handleSubmit(launchToSpace)(e);
+        }
+    };
+
+    return {
+        register: methods.register,
+        handleSubmit: handleFormSubmit,
+        formState: methods.formState,
+        submissionState,
+        fields: formConfig.fields,
+        formId: formConfig.id,
+        resetForm: methods.reset,
+
+        submitData: launchToSpace,
+    };
 };
 
 export default useHubspotForm;
