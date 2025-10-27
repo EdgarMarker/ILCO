@@ -73,9 +73,9 @@ export const getAllMachineCategories = async () => {
 	return data;
 };
 
-export const getMachineByCategory = async (categorySlug: string) => {
+export const getMachineByCategory = async ({slug}: {slug: string}) => {
 	const QUERY = `
-    *[_type == "machine" && general.ref_machineCategory->slug.current == "${categorySlug}"] {
+    *[_type == "machine" && general.ref_machineCategory->slug.current == "${slug}"] {
       ${MACHINE_FIELDS}
     }
   `;

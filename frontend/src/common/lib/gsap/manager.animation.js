@@ -10,7 +10,7 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, ScrollSmoother, useGSAP);
 }
 
-export { useGSAP };
+export { useGSAP, gsap, ScrollTrigger, ScrollSmoother };
 
 /**
  * Inicializa ScrollSmoother de forma segura para SSR/hidratación.

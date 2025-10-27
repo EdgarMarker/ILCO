@@ -37,7 +37,7 @@ const BlogFilterSection = ({ blogPage, categories }: Props) => {
 			const rawData =
 				category === "all"
 					? await getAllPost()
-					: await getPostsByCategory(category);
+					: await getPostsByCategory({slug: category});
 
 			const postData = rawData.map((item: any) => new PostModel(item));
 			setPosts(postData);

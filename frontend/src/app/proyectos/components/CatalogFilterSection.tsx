@@ -36,7 +36,7 @@ const CatalogFilterSection = ({ dataPage, categories }: Props) => {
 			const rawData =
 				category === "all"
 					? await getAllProducts()
-					: await getProductsByCategory(category);
+					: await getProductsByCategory({slug: category});
 
 			const productData = rawData.map((item: any) => new ProductModel(item));
 			setProducts(productData);

@@ -26,7 +26,7 @@ export default async function Home() {
 	return (
 		<main id="Home">
 			{/* HERO */}
-			<section className="section__hero">
+			<section className="section__hero fadeInOut">
 				<div className="column__2">
 					<div className="col__left">
 						<h1>{data.hero.string_h1}</h1>
@@ -58,7 +58,7 @@ export default async function Home() {
 			</section>
 
 			{/* ABOUT US */}
-			<section className="section__about">
+			<section className="section__about fadeInOut">
 				<div className="column__2">
 					<div className="col__left">
 						<div className="portable__wrapper">
@@ -82,7 +82,7 @@ export default async function Home() {
 			</section>
 
 			{/**Experience */}
-			<section className="section__experience">
+			<section className="section__experience fadeInOut">
 				<div className="column__1">
 						<div className="portable__wrapper">
 							<CustomPortableText
@@ -105,7 +105,7 @@ export default async function Home() {
 			</section>
 
 			{/* PROJECTS */}
-			<section className="section__projects">
+			<section className="section__projects fadeInOut">
 				<div className="column__2">
 					<div className="col__left">
 						<div className="portable__wrapper">
@@ -128,7 +128,7 @@ export default async function Home() {
 			<HomeBlogSection blogData={serialize(data)} />
 
 			{/** MACHINES */}
-			<section className="section__machines">
+			<section className="section__machines fadeInOut">
 				<div className="column__2">
 					<div className="col__left">
 						<div className="portable__wrapper">

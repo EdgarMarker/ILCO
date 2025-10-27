@@ -25,6 +25,15 @@ const page = async ({ params }: Props) => {
 	const rawData = await getProductData({ slug: params.slug });
 	const data = new ProductModel(rawData);
 
+
+	function getYouTubeEmbedUrl(url: string) {
+		if (!url) return "";
+		const match = url.match(
+			/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/,
+		);
+		return match ? `https://www.youtube.com/embed/${match[1]}` : url;
+	}
+
 	return (
 		<main id="ProjectDetail">
 			{/**hero */}
@@ -36,15 +45,15 @@ const page = async ({ params }: Props) => {
 				<div className="column__1">
 					<div className="proyect__title">
 						<span className="breadcrumbs">
-							<Link href="/proyectos">Proyectos</Link>
-							/
-							<Link href={`/proyectos/categorias/${data.general.ref_productCategory.slug.current}`}>
+							<Link href="/proyectos">Proyectos</Link>/
+							<Link
+								href={`/proyectos/categorias/${data.general.ref_productCategory.slug.current}`}
+							>
 								{data.general.ref_productCategory.string_line_category_name}
 							</Link>
 						</span>
 						<h1>{data.general.string_line_general_title}</h1>
 					</div>
-					
 				</div>
 			</section>
 
@@ -98,32 +107,40 @@ const page = async ({ params }: Props) => {
 				</div>
 			</section>
 
-            {/**RESULT */}
-            <section className="section__result">
-                <div className="column__2">
-                    <div className="col__left">
+			{/**RESULT */}
+			<section className="section__result">
+				<div className="column__2">
+					<div className="col__left">
 						<h3>Resultado</h3>
-                        <CustomPortableText
-                            hasImg={false}
-                            data={data.page.list_block_title_page_result}
-                        />
-                    </div>
-                    <div className="col__right">
+						<CustomPortableText
+							hasImg={false}
+							data={data.page.list_block_title_page_result}
+						/>
+					</div>
+					<div className="col__right">
 						<p>{data.page.string_textarea_page_result}</p>
-                        {data.page.bool_page_result ? (
-                            <ResponsiveImage
-                                imageData={data.page.img_page_resultImage}
-                                variant="banner"
-                            />
-                        ) : (
-                            <p>No hay resultados disponibles.</p>
-                        )}
-                    </div>
-                </div>
-            </section>
+						{data.page.bool_page_result ? (
+							<iframe
+								width="560"
+								height="315"
+								src={getYouTubeEmbedUrl(data.page.page_video_result_media)}
+								title="Resultado del proyecto"
+								frameBorder="0"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+								allowFullScreen
+							></iframe>
+						) : (
+							<ResponsiveImage
+								imageData={data.page.img_page_resultImage}
+								variant="banner"
+							/>
+						)}
+					</div>
+				</div>
+			</section>
 
-            {/** GALLERY */}
-            <ProductGallerySection productData={serialize(data)} />
+			{/** GALLERY */}
+			<ProductGallerySection productData={serialize(data)} />
 			<PreFooter />
 		</main>
 	);

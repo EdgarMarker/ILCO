@@ -21,7 +21,8 @@ export class ProductModel extends BaseModel {
 		string_textarea_general_cardExcerpt: string;
 	};
 	public page!: {
-		bool_page_result: string;
+		page_video_result_media: string;
+		bool_page_result: boolean;
 		img_page_divider: Image;
 		img_page_intro: Image;
 		img_page_resultImage: Image;
@@ -63,7 +64,10 @@ export class ProductModel extends BaseModel {
 				),
 			},
 			page: {
-				bool_page_result: this.safeString(data?.page?.bool_page_result),
+				page_video_result_media: this.safeString(
+					data?.page?.page_video_result_media,
+				),
+				bool_page_result: Boolean(data?.page?.bool_page_result),
 				img_page_divider: this.safeImage(data?.page?.img_page_divider),
 				img_page_intro: this.safeImage(data?.page?.img_page_intro),
 				img_page_resultImage: this.safeImage(data?.page?.img_page_resultImage),

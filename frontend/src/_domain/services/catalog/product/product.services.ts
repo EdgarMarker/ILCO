@@ -19,6 +19,7 @@ export const PRODUCT_FIELDS = `
     string_textarea_general_cardExcerpt
   },
   page {
+    page_video_result_media,
     bool_page_result,
     img_page_divider {
       "media": asset -> { url },
@@ -88,9 +89,9 @@ export const getAllProductCategories = async () => {
 	return data;
 };
 
-export const getProductsByCategory = async (categorySlug: string) => {
+export const getProductsByCategory = async ({ slug }: { slug: string }) => {
   const QUERY = `
-    *[_type == "product" && general.ref_productCategory->slug.current == "${categorySlug}"] {
+    *[_type == "product" && general.ref_productCategory->slug.current == "${slug}"] {
       ${PRODUCT_FIELDS}
     }
   `;

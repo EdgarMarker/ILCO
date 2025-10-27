@@ -1,0 +1,18 @@
+.section__hero{
+        height: auto;
+        width: 100%;
+        .column__1{
+            height: 50vh;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+                h1{
+                    font-size: var(--size-2xl);
+                    text-transform: uppercase;
+                    color: var(--color-primary);
+                    font-weight: 800;
+                    line-height: 1;
+                    margin-bottom: 0;
+                }
+        }
+}

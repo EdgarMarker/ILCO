@@ -39,7 +39,7 @@ const HomeBlogSection = ({ blogData }: Props) => {
     };
 
     return (
-        <section className="section__blog">
+        <section className="section__blog fadeInOut">
             <div className="column__2">
                 <div className="col__left">
                     <CustomPortableText

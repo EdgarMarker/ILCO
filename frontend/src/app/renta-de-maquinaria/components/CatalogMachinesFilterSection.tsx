@@ -36,7 +36,7 @@ const CatalogFilterSection = ({ dataPage, categories }: Props) => {
 			const rawData =
 				category === "all"
 					? await getAllMachines()
-					: await getMachineByCategory(category);
+					: await getMachineByCategory({slug: category});
 
 			const machineData = rawData.map((item: any) => new MachineModel(item));
 			setMachines(machineData);

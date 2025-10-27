@@ -106,8 +106,7 @@ const SECTIONS = [
 			{
 				name: "page_video_result_media",
 				title: "Video de resultados",
-				type: "file",
-				accept: "video/*",
+				type: "url",
 				hidden: ({ document }: { document: any }) =>
 					!document?.page?.bool_page_result,
 				description:

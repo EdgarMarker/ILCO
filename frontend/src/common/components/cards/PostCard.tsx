@@ -22,7 +22,7 @@ const PostCard = ({ postData }: Props) => {
 			</div>
 			<div className="card__body">
 				<div className="card__description">
-					<Link href={`/blog/categorias/${postData.general.ref_postCategory.slug.current}`} className="card__cat">
+					<Link href={`/blog/categoria/${postData.general.ref_postCategory.slug.current}`} className="card__cat">
 						Categoría:{" "}
 						{postData.general.ref_postCategory.string_line_category_name}
 					</Link>

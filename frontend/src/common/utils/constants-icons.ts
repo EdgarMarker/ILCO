@@ -1,4 +1,4 @@
-import type { Image } from "@/_domain/interfaces/modules/modules.types";
+import type { Image } from "@/_domain/models/modules/modules.model";
 
 const createIcon = (url: string, altText: string): Image => ({
   _type: "image",

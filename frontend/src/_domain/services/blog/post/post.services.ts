@@ -68,9 +68,9 @@ export const getAllPostCategories = async () => {
   return data;
 };
 
-export const getPostsByCategory = async (categorySlug: string) => {
+export const getPostsByCategory = async ({ slug }: { slug: string }) => {
   const QUERY = `
-    *[_type == "post" && general.ref_postCategory->slug.current == "${categorySlug}"] {
+    *[_type == "post" && general.ref_postCategory->slug.current == "${slug}"] {
       ${POST_FIELDS}
     } | order(_createdAt desc)
   `;

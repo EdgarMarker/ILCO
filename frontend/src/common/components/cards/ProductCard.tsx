@@ -21,7 +21,7 @@ const ProductCard = ({ data, variant }: Props) => {
 				</Link>
 			</div>
 			<div className="card__body">
-				<Link className="card__cat" href={`/proyectos/categorias/${data.general.ref_productCategory.slug.current}`}>
+				<Link className="card__cat" href={`/proyectos/categoria/${data.general.ref_productCategory.slug.current}`}>
 					{data.general.ref_productCategory.string_line_category_name}
 				</Link>
 				<Link className="card__title" href={`/proyectos/${data.general.slug.current}`}>

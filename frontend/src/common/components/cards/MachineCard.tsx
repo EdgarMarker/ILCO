@@ -21,7 +21,7 @@ const MachineCard = ({ data, variant = "primary" }: Props) => {
 			</div>
 			<div className="card__body">
 				<div className="card__description">
-					<Link className="card__cat" href={`renta-de-maquinaria/categorias/${data.general.ref_machineCategory.slug.current}`}>
+					<Link className="card__cat" href={`renta-de-maquinaria/categoria/${data.general.ref_machineCategory.slug.current}`}>
 						{data.general.ref_machineCategory.string_line_category_name}
 					</Link>
 					<Link className="card__title" href={`renta-de-maquinaria/${data.general.slug.current}`}>
