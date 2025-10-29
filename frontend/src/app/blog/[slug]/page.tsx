@@ -37,7 +37,7 @@ const page = async ({ params }: Props) => {
 
 	return (
 		<main id="BlogPost">
-			<section className="section__hero">
+			<section className="section__hero fadeInOut">
 				<ResponsiveImage
 					imageData={data.general.img_general_primaryImg}
 					variant="hero"
@@ -51,7 +51,7 @@ const page = async ({ params }: Props) => {
 				</div>
 			</section>
 
-			<section className="section__content">
+			<section className="section__content fadeInOut">
 				<div className="column__2">
 					<div className="col__left">
 						<CustomPortableText

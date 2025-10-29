@@ -48,7 +48,7 @@ const BlogFilterSection = ({ blogPage, categories }: Props) => {
 	}, [category]);
 
 	return (
-		<section className="section__projects">
+		<section className="section__projects fadeInOut">
 			<div className="column__2">
 				<div className="col__left">
 					<CustomPortableText

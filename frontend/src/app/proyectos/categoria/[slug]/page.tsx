@@ -9,18 +9,19 @@ const page = async ({ params }: { params: { slug: string } }) => {
 	const data = rawData.map((item: any) => new ProductModel(item));
 	return (
 		<>
-			<section className="section__hero">
+			<section className="section__hero fadeInOut">
 				<div className="column__1">
 					<h1>{params.slug.toUpperCase()}</h1>
 				</div>
 			</section>
-			<section>
+			<section className="section__projects fadeInOut">
 				<div className="column__1">
-					<div className="listado">
+
+					<ul className="listado" role="list">
 						{data.map((post: ProductModel, idx: number) => (
 							<ProductCard key={idx ?? ""} data={post} />
 						))}
-					</div>
+					</ul>
 				</div>
 			</section>
 		</>

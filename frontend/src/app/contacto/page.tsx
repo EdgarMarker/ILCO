@@ -10,6 +10,8 @@ import "./page.css"
 import HubspotForm from "@/common/components/forms/HubspotForm";
 import GoogleMap from "@/common/components/googlemaps/GoogleMap";
 import { MapStyles } from "@/common/components/googlemaps/MapStyles";
+import ContactHeroSection from "./components/ContactHeroSection";
+import { serialize } from "@/common/utils/helper-serialize";
 
 export const generateMetadata = async () => {
 	const rawData = await getContactPageData();
@@ -30,30 +32,9 @@ const page = async () => {
 	};
 	return (
 		<main id="Contact">
-			<section className="section__hero">
-				<div className="column__2">
-					<div className="col__left">
-						<h1>{data.hero.string_h1}</h1>
-						<CustomPortableText
-							hasImg={false}
-							data={data.hero.list_block_title_hero_title}
-						/>
-					</div>
-					<div className="col__right">
-						<video width="1920" height="1080" autoPlay muted preload="none" loop>
-							<source src="/videos/prueba.mp4" type="video/mp4" />
-							Tu navegador no soporta la etiqueta de video.
-						</video>
-						<ResponsiveImage
-							imageData={data.hero.img_hero_png}
-							variant="banner"
-							className="subject"
-						/>
-					</div>
-				</div>
-			</section>
+			<ContactHeroSection data={serialize(data)} />
 
-			<section className="section__contact">
+			<section className="section__contact fadeInOut">
 				<div className="column__2">
 					<div className="col__left">
 						<h3>Datos de contacto</h3>
@@ -83,7 +64,7 @@ const page = async () => {
 				</div>
 			</section>
 
-			<section className="section__map">
+			<section className="section__map fadeInOut">
 				<div className="column__1">
 					<GoogleMap
 					center={center}

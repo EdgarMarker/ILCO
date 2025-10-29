@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 import {
 	initBatchAnimation,
@@ -8,13 +9,10 @@ import {
 	useGSAP,
 } from "./manager.animation";
 
-const ScrollSmootherProvider = ({
-	children,
-}: {
-	children: React.ReactNode;
-}) => {
+const ScrollSmootherProvider = ({ children }: { children: React.ReactNode }) => {
 	const content = useRef<HTMLDivElement>(null);
 	const wrapper = useRef<HTMLDivElement>(null);
+	const pathname = usePathname();
 
 	useGSAP(
 		() => {
@@ -22,15 +20,15 @@ const ScrollSmootherProvider = ({
 				wrapper: wrapper.current,
 				content: content.current,
 			});
-			initBatchAnimation({ wrapperRef: wrapper.current });
+			const cleanup = initBatchAnimation({ wrapperRef: wrapper.current });
+			return cleanup;
 		},
-		{ scope: wrapper.current as HTMLElement },
+		{ scope: wrapper.current as HTMLElement, dependencies: [pathname] },
 	);
+
 	return (
 		<div ref={wrapper}>
-			<div ref={content}>
-				{children}
-			</div>
+			<div ref={content}>{children}</div>
 		</div>
 	);
 };

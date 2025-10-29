@@ -34,7 +34,7 @@ const ProductGallerySection = ({ productData }: Props) => {
 		},
 	};
 	return (
-		<section className="section__gallery">
+		<section className="section__gallery fadeInOut">
 			<div className="column__2">
 				<div className="col__left">
 					<CustomPortableText

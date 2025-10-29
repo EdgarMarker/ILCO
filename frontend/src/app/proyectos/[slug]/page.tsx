@@ -37,7 +37,7 @@ const page = async ({ params }: Props) => {
 	return (
 		<main id="ProjectDetail">
 			{/**hero */}
-			<section className="section__hero">
+			<section className="section__hero fadeInOut">
 				<ResponsiveImage
 					imageData={data.general.img_general_primaryImg}
 					variant="hero"
@@ -58,7 +58,7 @@ const page = async ({ params }: Props) => {
 			</section>
 
 			{/**INTRO */}
-			<section className="section__intro">
+			<section className="section__intro fadeInOut">
 				<div className="column__2">
 					<div className="col__left">
 						<ResponsiveImage
@@ -79,7 +79,7 @@ const page = async ({ params }: Props) => {
 			</section>
 
 			{/**SOLUTION */}
-			<section className="section__solution">
+			<section className="section__solution fadeInOut">
 				<div className="column__2">
 					<div className="col__left">
 						<h3>Solución</h3>
@@ -98,7 +98,7 @@ const page = async ({ params }: Props) => {
 			</section>
 
 			{/**DIVIDER */}
-			<section className="section__divider">
+			<section className="section__divider fadeInOut">
 				<div className="column__1">
 					<ResponsiveImage
 						imageData={data.page.img_page_divider}
@@ -108,7 +108,7 @@ const page = async ({ params }: Props) => {
 			</section>
 
 			{/**RESULT */}
-			<section className="section__result">
+			<section className="section__result fadeInOut">
 				<div className="column__2">
 					<div className="col__left">
 						<h3>Resultado</h3>

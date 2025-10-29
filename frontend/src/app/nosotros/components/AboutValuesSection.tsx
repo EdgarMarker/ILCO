@@ -35,7 +35,7 @@ const AboutValuesSection = ({ aboutData }: Props) => {
 	};
 
 	return (
-		<section className="section__values">
+		<section className="section__values fadeInOut">
 			<div className="column__2">
 				<div className="col__left">
 					<CustomPortableText

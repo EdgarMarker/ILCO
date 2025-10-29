@@ -9,7 +9,7 @@ export default async function PreFooter() {
 	const data= new CompanyModel(rawData);
 
 	return (
-        <section className="section__prefooter">
+        <section className="section__prefooter fadeInOut">
             <div className="column__2">
                 <div className="col__left">
                     <h3>Contáctanos</h3>

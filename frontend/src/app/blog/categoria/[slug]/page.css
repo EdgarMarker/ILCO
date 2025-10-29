@@ -2,7 +2,7 @@
         height: auto;
         width: 100%;
         .column__1{
-            height: 50vh;
+            height: 30vh;
             width: 100%;
             align-items: center;
             justify-content: center;
@@ -16,3 +16,9 @@
                 }
         }
 }
+ .section__content{
+        padding: 5% 5%;
+        .column__1{
+            padding-top: 5vh;
+        }
+    }

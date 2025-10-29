@@ -121,3 +121,33 @@ export const initBatchAnimation = ({
     try { ctx.revert(); } catch (_) {}
   };
 };
+
+
+export const startHero = ({ h1El, h2El, pEl, imgEl }) => {
+	const tl = gsap.timeline();
+
+	tl.to(imgEl, {
+		opacity: 1,
+		y: 0,
+		duration: 1,
+		ease: "power2.out",
+	})
+	.to(h1El, {
+		opacity: 1,
+		y: 0,
+		duration: 0.8,
+		ease: "power2.out",
+	}, "+=0.1") 
+	.to(h2El, {
+		opacity: 1,
+		y: 0,
+		duration: 0.7,
+		ease: "power2.out",
+	}, "+=0.05")
+	.to(pEl, {
+		opacity: 1,
+		y: 0,
+		duration: 0.7,
+		ease: "power2.out",
+	}, "+=0.05");
+};

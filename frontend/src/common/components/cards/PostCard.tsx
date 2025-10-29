@@ -13,22 +13,22 @@ const PostCard = ({ postData }: Props) => {
 	return (
 		<div className="card card__post">
 			<div className="card__header">
-				<Link href={`/blog/${postData.general.slug.current}`}>
+				<a href={`/blog/${postData.general.slug.current}`}>
 					<ResponsiveImage
 						imageData={postData.general.img_general_primaryImg}
 						variant="card"
 					/>
-				</Link>
+				</a>
 			</div>
 			<div className="card__body">
 				<div className="card__description">
-					<Link href={`/blog/categoria/${postData.general.ref_postCategory.slug.current}`} className="card__cat">
+					<a href={`/blog/categoria/${postData.general.ref_postCategory.slug.current}`} className="card__cat">
 						Categoría:{" "}
 						{postData.general.ref_postCategory.string_line_category_name}
-					</Link>
-					<Link className="card__title" href={`/blog/${postData.general.slug.current}`}>
+					</a>
+					<a className="card__title" href={`/blog/${postData.general.slug.current}`}>
 						{postData.general.string_line_general_title}
-					</Link>
+					</a>
 				</div>
 				<div className="card__desc__wrapper">
 					<p>{postData.general.string_textarea_general_cardExcerpt}</p>

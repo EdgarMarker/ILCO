@@ -1,5 +1,22 @@
 #Blog{
-
+.section__hero{
+    .column__2{
+      .col__left{
+        h1,h2,p{
+          opacity: 0;
+          transform: translateY(50px);
+          transition: none;
+          will-change: opacity, transform;
+        }
+      }
+      .col__right{
+        opacity: 0;
+        transform: translateY(50px);
+        transition: none;
+        will-change: opacity, transform;
+      }
+    }
+  }
     .section__hero{
         padding: 100px 0% 0;
         height: auto;

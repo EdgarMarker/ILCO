@@ -1,4 +1,4 @@
-import { gsap } from "@/common/lib/gsap/manager.animation.js";
+import { gsap, ScrollTrigger } from "@/common/lib/gsap/manager.animation.js";
 /**
  *? NOTA IMPORTANTE SOBRE ANIMACIONES EN NEXT.JS
  *
@@ -10,8 +10,8 @@ import { gsap } from "@/common/lib/gsap/manager.animation.js";
  *? RESUMEN: Si quieres animar algo en Next.js, asegúrate de que el código esté en un componente cliente.
  */
 
-export const Pulse = ({ section}) => {
-    console.log("Mounted Animations")
+export const Pulse = ({ section }) => {
+	console.log("Mounted Animations");
 
 	gsap.to(section, {
 		backgroundColor: "#f0f0f0",
@@ -20,9 +20,8 @@ export const Pulse = ({ section}) => {
 			start: "top center",
 			end: "bottom center",
 			scrub: true,
-            markers: true,
+			markers: true,
 		},
 	});
 };
 
-//* Para ejemplo practico de como usar esta animación, puedes consultar el componente HomeTestimonialSection.tsx

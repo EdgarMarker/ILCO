@@ -12,21 +12,21 @@ const MachineCard = ({ data, variant = "primary" }: Props) => {
 	return (
 		<li className={`card machine__card`}>
 			<div className="card__header">
-				<Link href={`renta-de-maquinaria/${data.general.slug.current}`}>
+				<a href={`renta-de-maquinaria/${data.general.slug.current}`}>
 					<ResponsiveImage
 						imageData={data.general.img_general_primaryImg}
 						variant="card"
 					/>
-				</Link>
+				</a>
 			</div>
 			<div className="card__body">
 				<div className="card__description">
-					<Link className="card__cat" href={`renta-de-maquinaria/categoria/${data.general.ref_machineCategory.slug.current}`}>
+					<a className="card__cat" href={`renta-de-maquinaria/categoria/${data.general.ref_machineCategory.slug.current}`}>
 						{data.general.ref_machineCategory.string_line_category_name}
-					</Link>
-					<Link className="card__title" href={`renta-de-maquinaria/${data.general.slug.current}`}>
+					</a>
+					<a className="card__title" href={`renta-de-maquinaria/${data.general.slug.current}`}>
 						{data.general.string_line_general_title}
-					</Link>
+					</a>
 				</div>
 			</div>
 			<RedirectButton

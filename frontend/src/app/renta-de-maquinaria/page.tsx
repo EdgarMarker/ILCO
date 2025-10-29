@@ -9,6 +9,7 @@ import { serialize } from "@/common/utils/helper-serialize";
 import CatalogMachinesFilterSection from "./components/CatalogMachinesFilterSection";
 import "./page.css";
 import PreFooter from "@/common/components/footer/PreFooter";
+import CatalogMachinesHeroSection from "./components/CatalogMachinesHeroSection";
 
 export const generateMetadata = async () => {
 	const rawData = await getCatalogMachinesPageData();
@@ -28,28 +29,7 @@ const page = async () => {
 	return (
 		<main id="Machines">
 			{/* HERO */}
-			<section className="section__hero">
-				<div className="column__2">
-					<div className="col__left">
-						<h1>{data.hero.string_h1}</h1>
-						<CustomPortableText
-							hasImg={false}
-							data={data.hero.list_block_title_hero_title}
-						/>
-					</div>
-					<div className="col__right">
-						<video width="1920" height="1080" autoPlay muted preload="none" loop>
-							<source src="/videos/prueba.mp4" type="video/mp4" />
-							Tu navegador no soporta la etiqueta de video.
-						</video>
-						<ResponsiveImage
-							imageData={data.hero.img_hero_png}
-							variant="banner"
-							className="subject"
-						/>
-					</div>
-				</div>
-			</section>
+			<CatalogMachinesHeroSection data={serialize(data)} />
 
 			{/** PROJECTS */}
 			<CatalogMachinesFilterSection

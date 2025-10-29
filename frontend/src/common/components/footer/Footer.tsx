@@ -37,7 +37,7 @@ export default async function Footer() {
 
 	return (
 		<footer>
-			<div className="column__2">
+			<div className="column__2 fadeInOut">
                 <div className="col__left">
                     <div className="foot__item">
                         <h3>Mapa del sitio</h3>

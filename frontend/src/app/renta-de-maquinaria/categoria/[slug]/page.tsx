@@ -9,12 +9,12 @@ const page = async ({ params }: { params: { slug: string } }) => {
 	const data = rawData.map((item: any) => new MachineModel(item));
 	return (
 		<>
-			<section className="section__hero">
+			<section className="section__hero fadeInOut">
 				<div className="column__1">
 					<h1>{params.slug.toUpperCase()}</h1>
 				</div>
 			</section>
-			<section>
+			<section className="section__content fadeInOut">
 				<div className="listado">
 					<div className="column__1">
 						{data.map((post: MachineModel, idx: number) => (

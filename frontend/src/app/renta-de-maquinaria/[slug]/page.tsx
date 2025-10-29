@@ -30,7 +30,7 @@ const page = async ({ params }: Props) => {
 	return (
 		<main id="MachineDetail">
 			{/* HERO */}
-			<section className="section__hero">
+			<section className="section__hero fadeInOut">
 				<div className="column__2">
 					<div className="col__left">
 						<span className="breadcrumbs">
@@ -61,7 +61,7 @@ const page = async ({ params }: Props) => {
 			</section>
 
 			{/* INTRO */}
-			<section className="section__intro">
+			<section className="section__intro fadeInOut">
 				<div className="column__2">
 					<div className="col__left">
 						<CustomPortableText
@@ -76,7 +76,7 @@ const page = async ({ params }: Props) => {
 			</section>
 
 			{/* EXPECTS */}
-			<section className="section__expects">
+			<section className="section__expects fadeInOut">
 				<div className="column__1">
 					<CustomPortableText
 						hasImg={false}
@@ -94,7 +94,7 @@ const page = async ({ params }: Props) => {
 			</section>
 
 			{/* DIVIDER IMAGE */}
-			<section className="section__divider">
+			<section className="section__divider fadeInOut">
 				<div className="column__1">
 					<ResponsiveImage
 						imageData={data.page.img_page_divider}

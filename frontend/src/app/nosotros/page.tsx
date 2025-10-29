@@ -11,6 +11,7 @@ import AboutValuesSection from "./components/AboutValuesSection";
 import { serialize } from "@/common/utils/helper-serialize";
 import "./page.css";
 import PreFooter from "@/common/components/footer/PreFooter";
+import AboutHeroSection from "./components/AboutHeroSection";
 
 export const generateMetadata = async () => {
 	const rawData = await getAboutPageData();
@@ -25,40 +26,10 @@ const page = async () => {
 	return (
 		<main id="About">
 			{/* HERO */}
-			<section className="section__hero">
-				<div className="column__2">
-					<div className="col__left">
-						<h1>{data.hero.string_h1}</h1>
-						<CustomPortableText
-							hasImg={false}
-							data={data.hero.list_block_title_hero_title}
-						/>
-						<div className="btn__wrapper">
-							<RedirectButton href="/proyectos" type="primary">
-								{data.hero.string_line_hero_button}
-							</RedirectButton>
-							<ScrollButton type="secondary" scrollTo="#intro">
-								{BUTTONS_TEXT.scrollDown}
-							</ScrollButton>
-						</div>
-						
-					</div>
-					<div className="col__right">
-						<video width="1920" height="1080" autoPlay muted preload="none" loop>
-							<source src="/videos/prueba.mp4" type="video/mp4" />
-							Tu navegador no soporta la etiqueta de video.
-						</video>
-						<ResponsiveImage
-							imageData={data.hero.img_hero_png}
-							variant="banner"
-							className="subject"
-						/>
-					</div>
-				</div>
-			</section>
+			<AboutHeroSection data={serialize(data)} />
 
 			{/* ABOUT US */}
-			<section className="section__about">
+			<section className="section__about fadeInOut">
 				<div className="column__2">
 					<div className="col__left">
 						<ResponsiveImage
@@ -78,7 +49,7 @@ const page = async () => {
 			</section>
 
 			{/* PHILOSOPHY */}
-			<section className="section__philosophy">
+			<section className="section__philosophy fadeInOut">
 				<div className="column__1">
 					<CustomPortableText
 						hasImg={false}
@@ -92,7 +63,7 @@ const page = async () => {
 			</section>
 
 			{/* HISTORY */}
-			<section className="section__history">
+			<section className="section__history fadeInOut">
 				<div className="column__2">
 					<div className="col__left">
 						<div className="portable__wrapper">
@@ -115,7 +86,7 @@ const page = async () => {
 			<AboutValuesSection aboutData={serialize(data)} />
 
 			{/** MACHINES */}
-			<section className="section__machines">
+			<section className="section__machines fadeInOut">
 				<div className="column__2">
 					<div className="col__left">
 						<ResponsiveImage

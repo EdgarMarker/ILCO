@@ -1,7 +1,6 @@
 /** biome-ignore-all lint/a11y/useSemanticElements: <custom ul> */
 /** biome-ignore-all lint/a11y/noRedundantRoles: <custom ul> */
 "use client";
-import Link from "next/link";
 import type { CompanyModel } from "@/_domain/models/company.model";
 import { useNavigation } from "@/common/hooks/useNavigation";
 import ResponsiveImage from "../images/ResponsiveImage";
@@ -27,7 +26,7 @@ const Nav = ({ companyData }: Props) => {
 	return (
 		<header>
 			<nav>
-				<Link href="/" className="logo" aria-label="Ir al inicio">
+				<a href="/" className="logo" aria-label="Ir al inicio">
 					{companyData?.general.icon_general_navLogo ? (
 						<ResponsiveImage
 							imageData={companyData?.general.icon_general_navLogo}
@@ -36,20 +35,20 @@ const Nav = ({ companyData }: Props) => {
 					) : (
 						<span>LOGO</span>
 					)}
-				</Link>
+				</a>
 
 				<ul role="list" className="nav-links">
 					{navItems.map((item) => {
 						const active = isLinkActive(item.href);
 						return (
 							<li key={item.href}>
-								<Link
+								<a
 									href={item.href}
 									className={`nav-link ${active ? "active" : ""}`}
 									aria-current={active ? "page" : undefined}
 								>
 									{item.title}
-								</Link>
+								</a>
 							</li>
 						);
 					})}
@@ -79,14 +78,14 @@ const Nav = ({ companyData }: Props) => {
 						const active = isLinkActive(item.href);
 						return (
 							<li key={item.href}>
-								<Link
+								<a
 									href={item.href}
 									className={`mobile-link ${active ? "active" : ""}`}
 									aria-current={active ? "page" : undefined}
 									onClick={closeMenu}
 								>
 									{item.title}
-								</Link>
+								</a>
 							</li>
 						);
 					})}
