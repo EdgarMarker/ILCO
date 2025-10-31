@@ -1,27 +1,35 @@
-import { gsap, ScrollTrigger } from "@/common/lib/gsap/manager.animation.js";
-/**
- *? NOTA IMPORTANTE SOBRE ANIMACIONES EN NEXT.JS
- *
- *? Las animaciones deben ejecutarse siempre del lado del cliente.
- *? No puedes importar este archivo directamente en páginas server-side (como la página principal).
- *? Para animar, usa componentes marcados con "use client" y hooks como useEffect o useGSAP(Altamente recomendable, nos ayuda a sincronizar la animación con el ciclo de vida del componente).
- *TODO: Mi recomendación: crea componentes específicos para cada sección animada y aplica ahí la lógica de animación.
- *
- *? RESUMEN: Si quieres animar algo en Next.js, asegúrate de que el código esté en un componente cliente.
- */
+"use client";
 
-export const Pulse = ({ section }) => {
-	console.log("Mounted Animations");
+import { useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
-	gsap.to(section, {
-		backgroundColor: "#f0f0f0",
-		scrollTrigger: {
-			trigger: section,
-			start: "top center",
-			end: "bottom center",
-			scrub: true,
-			markers: true,
-		},
-	});
-};
+gsap.registerPlugin(ScrollTrigger);
+export { gsap, ScrollTrigger, useGSAP };
 
+export default function Animations() {
+  const scopeRef = useRef(null);
+
+  useGSAP(() => {
+    const ProyGal = document.getElementById("ProyGal");
+    const ProyGalSection = document.querySelector("#ProyGal .proy__slider");
+    if (!ProyGal || !ProyGalSection) return;
+
+	
+
+    gsap.from(ProyGal, {
+      x: "50%",
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: ProyGalSection,
+        start: "top bottom",
+        end: "top 50%",
+        scrub: true,
+      },
+    });
+  }, { scope: scopeRef });
+
+  // Para que useGSAP tenga un scope real (y cleanup automático), renderiza un wrapper “invisible”
+  return <div ref={scopeRef} style={{ display: "contents" }} />;
+}

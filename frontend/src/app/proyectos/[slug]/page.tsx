@@ -8,6 +8,7 @@ import ProductGallerySection from "../components/ProductGallerySection";
 import "./page.css";
 import Link from "next/link";
 import PreFooter from "@/common/components/footer/PreFooter";
+import Animations from "./page.animation";
 
 interface Props {
 	params: {
@@ -37,10 +38,11 @@ const page = async ({ params }: Props) => {
 	return (
 		<main id="ProjectDetail">
 			{/**hero */}
-			<section className="section__hero fadeInOut">
+			<section className="section__hero">
 				<ResponsiveImage
 					imageData={data.general.img_general_primaryImg}
 					variant="hero"
+					dataSpeed="clamp(0.7)"
 				/>
 				<div className="column__1">
 					<div className="proyect__title">
@@ -142,6 +144,7 @@ const page = async ({ params }: Props) => {
 			{/** GALLERY */}
 			<ProductGallerySection productData={serialize(data)} />
 			<PreFooter />
+			<Animations />
 		</main>
 	);
 };

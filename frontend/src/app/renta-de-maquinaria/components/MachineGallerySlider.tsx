@@ -35,7 +35,7 @@ const MachineGallerySlider = ({ machineData }: Props) => {
 			<Splide ref={splideRef} options={splideOptions}>
 				{machineData.page.list_img.map((image, index) => (
 					<SplideSlide key={index ?? ""}>
-						<ResponsiveImage imageData={image} variant="gallery" />
+						<ResponsiveImage imageData={image} variant="gallery" dataSpeed="clamp(0.8)" />
 					</SplideSlide>
 				))}
 			</Splide>

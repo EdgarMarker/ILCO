@@ -5,7 +5,9 @@ export const MACHINE_FIELDS = `
   _id,
   _type,
   general {
-    file_general_brochure,
+    file_general_brochure {
+      "url": asset -> url
+    },
     img_general_primaryImg {
       "media": asset -> { url },
       "alt": asset -> { altText }

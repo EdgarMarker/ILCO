@@ -1,22 +1,5 @@
 #Home{
-  .section__hero{
-    .column__2{
-      .col__left{
-        h1,h2,p{
-          opacity: 0;
-          transform: translateY(50px);
-          transition: none;
-          will-change: opacity, transform;
-        }
-      }
-      .col__right{
-        opacity: 0;
-        transform: translateY(50px);
-        transition: none;
-        will-change: opacity, transform;
-      }
-    }
-  }
+  
   .section__hero{
     padding: 100px 0% 0;
     .column__2{
@@ -59,8 +42,7 @@
           aspect-ratio: 1.25;
           width: 100%;
           height: 100%;
-          object-fit: cover;
-          filter: grayscale();
+          object-fit: cover;          
         }
         .subject{
           position: absolute;
@@ -69,6 +51,7 @@
           bottom: -10%;
           left: -10%;
           z-index: 1;
+          
         }
       }
     }
@@ -105,28 +88,35 @@
   }
 
   .section__experience{
-    padding: 8% 5% 0%;
+    padding: 5% 5% 0%;
     background-color: var(--color-primary);
     .column__1{
       flex-direction: row;
-      align-items: flex-start;
+      align-items: center;
       .portable__wrapper{
-        width: 33.33%;
+        width: 27%;
         h3{
           color: var(--color-white);
         }
         h2{
           color: var(--color-white);
+          width: 90%;
         }
         p{
           color: var(--color-white);
+          width: 80%;
         }
       }
       .bloques__anim{
-        width: 33.33%;
+        width: 45%;
+        &> div{
+          width: 100% !important;
+          height: auto !important;
+          aspect-ratio: 1;
+        }
       }
       ul{
-        width: 33.33%;
+        width: 28%;
         li{
           display: flex;
           flex-direction: column;

@@ -6,7 +6,14 @@ export const PRODUCT_FIELDS = `
   _type,
   general {
     img_general_primaryImg {
-      "media": asset -> { url },
+      "media": asset -> {
+        _id,
+        url,
+        metadata{
+          lqip,
+          dimensions{width, height, aspectRatio}
+        }
+      },
       "alt": asset -> { altText }
     },
     list_block_title_general_description,

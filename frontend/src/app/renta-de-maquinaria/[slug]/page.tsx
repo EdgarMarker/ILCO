@@ -10,6 +10,7 @@ import MachineGallerySlider from "../components/MachineGallerySlider";
 import "./page.css";
 import Link from "next/link";
 import PreFooter from "@/common/components/footer/PreFooter";
+import Animations from "./page.animation";
 
 interface Props {
 	params: {
@@ -30,7 +31,7 @@ const page = async ({ params }: Props) => {
 	return (
 		<main id="MachineDetail">
 			{/* HERO */}
-			<section className="section__hero fadeInOut">
+			<section className="section__hero">
 				<div className="column__2">
 					<div className="col__left">
 						<span className="breadcrumbs">
@@ -44,12 +45,19 @@ const page = async ({ params }: Props) => {
 						</span>
 						<h1>{data.general.string_line_general_title}</h1>
 						<div className="btn__wrapper">
-							<ScrollButton type="secondary" scrollTo="#intro">
+							<ScrollButton type="secondary" scrollTo="#PreFooter">
 								Solicitar Cotización
 							</ScrollButton>
-							<a className="btn" href={data.general.file_general_brochure} target="_blank">
+							{data.general.file_general_brochure && (
+							<a
+								className="btn"
+								href={data.general.file_general_brochure}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
 								Descargar ficha técnica
 							</a>
+							)}
 						</div>
 						
 					</div>
@@ -61,7 +69,7 @@ const page = async ({ params }: Props) => {
 			</section>
 
 			{/* INTRO */}
-			<section className="section__intro fadeInOut">
+			<section className="section__intro">
 				<div className="column__2">
 					<div className="col__left">
 						<CustomPortableText
@@ -103,7 +111,7 @@ const page = async ({ params }: Props) => {
 				</div>
 			</section>
 			<PreFooter />
-
+			<Animations />
 		</main>
 	);
 };

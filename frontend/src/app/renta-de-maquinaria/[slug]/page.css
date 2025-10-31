@@ -10,6 +10,8 @@
                 padding: calc(5% + 7vh) 5% 5%;
                 justify-content: center;
                 width: 45%;
+                opacity: 0;
+                transform: translateX(-30%);
                 &::before{
                 content: "";
                     display: block;
@@ -33,6 +35,8 @@
                     font-weight: 400;
                     color: var(--color-primary);
                     margin-bottom: 0.3em;
+                    opacity: 0;
+                    transform: translateY(50px);
                     a{
                         text-decoration: none;
                         color: var(--color-white);
@@ -52,6 +56,8 @@
                     line-height: 1;
                     margin-bottom: 0;
                     color: var(--color-secondary);
+                    opacity: 0;
+                    transform: translateY(50px);
                 }
                 .btn__wrapper{
                     margin-top: 4vh;
@@ -60,6 +66,8 @@
                     align-items: flex-start;
                     justify-content: center;
                     gap: 1.2em;
+                    opacity: 0;
+                    transform: translateY(50px);
                     .btn{
                         width: 100%;
                         &::before{
@@ -81,6 +89,8 @@
             .col__right{
                 position: relative;
                 width: 55%;
+                opacity: 0;
+                transform: translateX(30%);
                 .splide{
                     .splide__arrows{
                         position: absolute;

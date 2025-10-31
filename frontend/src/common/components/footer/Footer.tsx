@@ -37,7 +37,7 @@ export default async function Footer() {
 
 	return (
 		<footer>
-			<div className="column__2 fadeInOut">
+			<div className="column__2">
                 <div className="col__left">
                     <div className="foot__item">
                         <h3>Mapa del sitio</h3>
@@ -64,7 +64,7 @@ export default async function Footer() {
                             </li>
                             {allCategory.map((category: ProductCategoryModel) => (
                                 <li key={category._id ?? category.slug.current}>
-                                    <Link href={`/proyectos/categorias/${category.slug.current}`}>
+                                    <Link href={`/proyectos/categoria/${category.slug.current}`}>
                                         {category.string_line_category_name}
                                     </Link>
                                 </li>
@@ -81,7 +81,7 @@ export default async function Footer() {
 
                             {allMachineCategory.map((category: MachineCategoryModel) => (
                                 <li key={category._id ?? category.slug.current}>
-                                <Link href={`/renta-de-maquinaria/categorias/${category.slug.current}`}>
+                                <Link href={`/renta-de-maquinaria/categoria/${category.slug.current}`}>
                                     {category.string_line_category_name}
                                 </Link>
                                 </li>
@@ -94,7 +94,7 @@ export default async function Footer() {
                         <ul role="list">
                             {data.social.arr_list.map((item, index) => (
                                 <li key={index ?? ""}>
-                                    <Link href={item.url_social_url}>{item.string_line_social_name}</Link>
+                                    <a href={item.url_social_url} target="_blank">{item.string_line_social_name}</a>
                                 </li>
                             ))}
                         </ul>
@@ -113,15 +113,15 @@ export default async function Footer() {
 			<div className="column__1">
 				<span>
 					ILCO Constructores ® Todos los derechos reservados.{" "}
-					<Link href="/aviso-de-privacidad">Aviso de Privacidad</Link>. Sitio
+					<a href="/aviso-de-privacidad">Aviso de Privacidad</a>. Sitio
 					web creado por{" "}
-					<Link
+					<a
 						href="https://marker.com.mx"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
 						Marker Branding
-					</Link>
+					</a>
 				</span>
 			</div>
 		</footer>

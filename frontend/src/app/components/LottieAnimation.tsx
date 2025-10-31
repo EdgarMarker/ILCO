@@ -61,31 +61,45 @@ export default function LottieScroll({
     });
     animRef.current = anim;
 
+    
+
     const onDOMLoaded = () => {
-      const total = anim.totalFrames || 1;
-      const from = Math.max(0, Math.min(startFrame, total - 1));
-      const to = Math.min(
-        endFrame != null ? endFrame : total - 1,
-        total - 1
-      );
+  const total = anim.totalFrames || 1;
+  const from = Math.max(0, Math.min(startFrame, total - 1));
+  const to   = Math.min(endFrame ?? total - 1, total - 1);
 
-      
-      const state = { t: 0 };
+  const state = { t: 0 }; // 0..1
+  // Muy recomendable para que escale desde el centro
+  gsap.set(containerRef.current, { transformOrigin: "center center", willChange: "transform" });
 
-      stRef.current = ScrollTrigger.create({
-        trigger: el,
-        start: "top 80%",   
-        end: "bottom 20%",  
-        scrub: true,
-        onUpdate: (self) => {
-          state.t = self.progress;
-          const frame = Math.round(from + (to - from) * state.t);
-          anim.goToAndStop(frame, true);
-        },
-        onLeave: () => anim.pause(),
-        onLeaveBack: () => anim.pause(),
-      });
-    };
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: containerRef.current!,
+      start: "top 75%",   
+      end: "top 10%",
+      scrub: true,        // <— scrub
+      onLeave: () => anim.pause(),
+      onLeaveBack: () => anim.pause(),
+    },
+  });
+
+  // 1) Lottie: progreso 0→1 con ease suave
+  tl.to(state, {
+    t: 1,
+    ease: "none",   // <— ease ligero
+    onUpdate: () => {
+      const frame = Math.round(from + (to - from) * state.t);
+      anim.goToAndStop(frame, true);
+    },
+  }, 0);
+
+  // 2) Escala del contenedor en el mismo rango (0 = inicio del timeline)
+  tl.to(containerRef.current, {
+    scale: 1.15,          // <— ajusta a tu gusto
+    ease: "power1.in",   // <— ease del escalado
+    transformOrigin: "bottom"
+  }, 0);
+};
 
     anim.addEventListener("DOMLoaded", onDOMLoaded);
 

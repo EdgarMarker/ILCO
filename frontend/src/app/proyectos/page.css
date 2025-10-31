@@ -1,22 +1,5 @@
 #Projects{
-  .section__hero{
-    .column__2{
-      .col__left{
-        h1,h2,p{
-          opacity: 0;
-          transform: translateY(50px);
-          transition: none;
-          will-change: opacity, transform;
-        }
-      }
-      .col__right{
-        opacity: 0;
-        transform: translateY(50px);
-        transition: none;
-        will-change: opacity, transform;
-      }
-    }
-  }
+
     .section__hero{
         padding: 100px 0% 0;
         .column__2{
@@ -73,6 +56,7 @@
 
     .section__projects{
         padding: 5% 5%;
+        scroll-margin-top: 80px;
         .column__2{
             .col__left{
                 .portableText{
@@ -105,10 +89,46 @@
         }
         .column__1{
             padding-top: 5vh;
+            align-items: center;
+            .pagination{
+                margin-top: 5%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 3%;
+                button{
+                    background-color: #00000010;
+                    font-size: var(--size-sm);
+                    aspect-ratio: 1;
+                    width: 2vw;
+                    min-width: 40px;
+                    max-width: 70px;
+                    color: var(--color-primary);
+                    &.active{
+                        text-decoration: underline;
+                        color: var(--color-black);
+                        background-color: var(--color-secondary);
+                    }
+                    &:hover{
+                        text-decoration: underline;
+                    }
+                    &:first-child{
+                        background-color: transparent;
+                        font-size: var(--size-md);
+                    }
+                    &:last-child{
+                        background-color: transparent;
+                        font-size: var(--size-md);
+                    }
+                }
+            }
         }
     }
 
     .card{
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
         .card__header{
             a{
                 width: auto;
@@ -117,6 +137,7 @@
                 display: block;
                 line-height: 0;
                 position: relative;
+                overflow: hidden;
                 &::after{
                     content: "";
                     height: 0.7em;
@@ -129,12 +150,24 @@
                 }
                 img{
                     aspect-ratio: 1.6;
+                    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+                }
+                &:hover{
+                    img{
+                        transform: scale(1.1);
+                        filter: brightness(0.6);
+                    }
                 }
             }
         }
         .card__body{
             background-color: var(--color-white);
             padding: 5%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: stretch;
             .card__cat{
                 display: block;
                 font-size: var(--size-sm);

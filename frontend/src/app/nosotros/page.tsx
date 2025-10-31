@@ -29,7 +29,7 @@ const page = async () => {
 			<AboutHeroSection data={serialize(data)} />
 
 			{/* ABOUT US */}
-			<section className="section__about fadeInOut">
+			<section id="Intro" className="section__about fadeInOut">
 				<div className="column__2">
 					<div className="col__left">
 						<ResponsiveImage
@@ -105,7 +105,7 @@ const page = async () => {
 							<RedirectButton href="/proyectos" type="primary">
 								{BUTTONS_TEXT.viewProject}
 							</RedirectButton>
-							<RedirectButton href="/contacto" type="primary">
+							<RedirectButton href="/renta-de-maquinaria" type="primary">
 								{data.machines.string_line_machines_btn}
 							</RedirectButton>
 						</div>

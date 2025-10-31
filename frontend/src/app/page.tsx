@@ -14,6 +14,7 @@ import "./page.css";
 import PreFooter from "@/common/components/footer/PreFooter";
 import HomeHeroSection from "./components/HomeHeroSection";
 import LottieAnimation from "./components/LottieAnimation";
+import Animations from "./page.animation";
 
 export const generateMetadata = async () => {
 	const rawData = await getHomePageData();
@@ -31,7 +32,7 @@ export default async function Home() {
 			<HomeHeroSection data={serialize(data)} />
 
 			{/* ABOUT US */}
-			<section className="section__about fadeInOut">
+			<section id="Intro" className="section__about fadeInOut">
 				<div className="column__2">
 					<div className="col__left">
 						<div className="portable__wrapper">
@@ -48,6 +49,7 @@ export default async function Home() {
 						<ResponsiveImage
 							imageData={data.about.img_about_banner}
 							variant="banner"
+							
 						/>
 					</div>
 				</div>
@@ -81,9 +83,9 @@ export default async function Home() {
 			</section>
 
 			{/* PROJECTS */}
-			<section className="section__projects fadeInOut">
+			<section className="section__projects">
 				<div className="column__2">
-					<div className="col__left">
+					<div className="col__left fadeInOut">
 						<div className="portable__wrapper">
 							<CustomPortableText
 								hasImg={false}
@@ -94,7 +96,7 @@ export default async function Home() {
 							</RedirectButton>
 						</div>
 					</div>
-					<div className="col__right">
+					<div className="col__right" id="ProyGal">
 						<HomeProjectSlider projectData={serialize(data)} />
 					</div>
 				</div>
@@ -112,7 +114,7 @@ export default async function Home() {
 								hasImg={false}
 								data={data.machines.list_block_title_machines_title}
 							/>
-							<RedirectButton href="/contacto" type="primary">
+							<RedirectButton href="/renta-de-maquinaria" type="primary">
 								{data.machines.string_line_machines_btn}
 							</RedirectButton>
 						</div>
@@ -129,6 +131,7 @@ export default async function Home() {
 			{/* TESTIMONIALS */}
 			<HomeTestimonialSection testyData={serialize(data)} />
 			<PreFooter />
+			<Animations />
 		</main>
 	);
 }

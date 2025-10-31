@@ -54,7 +54,7 @@ const HomeProjectSlider = ({ projectData }: Props) => {
 	}, [mainMounted, textMounted]);
 
 	return (
-		<div>
+		<div className="proy__slider">
 			<Splide
 				ref={mainSliderRef}
 				options={mainSliderOptions}

@@ -34,9 +34,9 @@ const page = async () => {
 		<main id="Contact">
 			<ContactHeroSection data={serialize(data)} />
 
-			<section className="section__contact fadeInOut">
+			<section className="section__contact">
 				<div className="column__2">
-					<div className="col__left">
+					<div className="col__left fadeInOut">
 						<h3>Datos de contacto</h3>
 						<h2>Contáctanos para recibir más información</h2>
 
@@ -64,7 +64,7 @@ const page = async () => {
 				</div>
 			</section>
 
-			<section className="section__map fadeInOut">
+			<section className="section__map">
 				<div className="column__1">
 					<GoogleMap
 					center={center}

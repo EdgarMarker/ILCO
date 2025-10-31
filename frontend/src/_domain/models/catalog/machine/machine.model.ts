@@ -40,7 +40,7 @@ export class MachineModel extends BaseModel {
 
 			general: {
 				file_general_brochure: this.safeString(
-					data?.general?.file_general_brochure,
+					data?.general?.file_general_brochure?.url
 				),
 				img_general_primaryImg: this.safeImage(
 					data?.general?.img_general_primaryImg,

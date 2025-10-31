@@ -23,6 +23,7 @@ const AboutValuesSection = ({ aboutData }: Props) => {
 	};
 
 	const splideOptions = {
+		type: 'slide',
 		arrows: false,
 		pagination: false,
 		perPage: 1,

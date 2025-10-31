@@ -12,6 +12,15 @@ if (typeof window !== "undefined") {
 
 export { useGSAP, gsap, ScrollTrigger, ScrollSmoother };
 
+export const safeRefresh = () => {
+  // refresca smoother primero, luego ScrollTrigger
+  const s = ScrollSmoother.get && ScrollSmoother.get();
+  if (s) s.refresh(true);
+  ScrollTrigger.refresh(true);
+};
+
+gsap.delayedCall(0.25, safeRefresh);
+
 /**
  * Inicializa ScrollSmoother de forma segura para SSR/hidratación.
  * - Evita crear múltiples instancias.
@@ -82,7 +91,7 @@ export const initBatchAnimation = ({
     ".fadeInOut h2",
     ".fadeInOut p",
     ".fadeInOut li",
-    ".fadeInOut picture",
+    ".fadeInOut img",
     ".fadeInOut .btn",
   ],
 }) => {
@@ -104,8 +113,8 @@ export const initBatchAnimation = ({
     });
 
     ScrollTrigger.batch(validElements, {
-      start: "top 80%",
-      end: "top 80%",
+      start: "-50px 85%",
+      end: "-50px 85%",
       stagger: 0.1,
       overwrite: true,
       force3D: true,
@@ -123,31 +132,43 @@ export const initBatchAnimation = ({
 };
 
 
-export const startHero = ({ h1El, h2El, pEl, imgEl }) => {
-	const tl = gsap.timeline();
+export const startHero = ({ containerEl, h1El, h2El, pEl, imgEl, vidEl, leftEl, btnEl }) => {
+  const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
 
-	tl.to(imgEl, {
-		opacity: 1,
-		y: 0,
-		duration: 1,
-		ease: "power2.out",
-	})
-	.to(h1El, {
-		opacity: 1,
-		y: 0,
-		duration: 0.8,
-		ease: "power2.out",
-	}, "+=0.1") 
-	.to(h2El, {
-		opacity: 1,
-		y: 0,
-		duration: 0.7,
-		ease: "power2.out",
-	}, "+=0.05")
-	.to(pEl, {
-		opacity: 1,
-		y: 0,
-		duration: 0.7,
-		ease: "power2.out",
-	}, "+=0.05");
+  // helper para añadir tweens solo si existe el target
+  const add = (target, vars, at) => (target ? tl.to(target, vars, at) : tl);
+
+  // 0) Evita FOUC: muestra el contenedor ya en layout effect
+  if (containerEl) gsap.set(containerEl, { visibility: "visible" });
+
+  // 1) Estados iniciales (solo los presentes)
+  const textEls = [h1El, h2El, pEl].filter(Boolean);
+  if (textEls.length) gsap.set(textEls, { opacity: 0, y: 50, willChange: "transform" });
+  if (imgEl) gsap.set(imgEl, { opacity: 0, x: 50, willChange: "transform" });
+  if (vidEl) gsap.set(vidEl, { opacity: 0, y: 0, x: "30%", willChange: "transform" });
+  if (leftEl) gsap.set(leftEl, { clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)" });
+  if (btnEl) gsap.set(btnEl, { opacity: 0, y: 50, x: 0, willChange: "transform" });
+
+  // 2) Timeline condicional
+  add(leftEl, { clipPath: "polygon(0 0, 101% 0, 101% 100%, 0% 100%)", duration: 0.8, ease: "power2.inOut" }, 0);
+  add(vidEl,  { opacity: 1, x: 0, y: 0, duration: 0.8, ease: "power2.inOut", clearProps: "x,y,willChange" }, "-=0.6");
+
+  if (textEls.length) {
+    tl.to(textEls, { opacity: 1, y: 0, duration: 0.4, stagger: 0.05, clearProps: "y,willChange" }, "-=0.3");
+  } else {
+    add(h1El, { opacity: 1, y: 0, duration: 0.4, clearProps: "y,willChange" }, "-=0.3");
+    add(h2El, { opacity: 1, y: 0, duration: 0.4, clearProps: "y,willChange" }, "-=0.3");
+    add(pEl,  { opacity: 1, y: 0, duration: 0.4, clearProps: "y,willChange" }, "-=0.3");
+  }
+
+  add(btnEl,  { opacity: 1, y: 0, duration: 0.4, clearProps: "y,willChange" }, "-=0.3");
+  add(imgEl, { opacity: 1, x: 0, duration: 0.5, ease: "power2.inOut", clearProps: "x,y,willChange" }, "-=0.2");
+
+  // 3) Limpieza final (NO borres opacity)
+  tl.add(() => {
+    // si quieres, limpia solo clipPath del left
+    if (leftEl) gsap.set(leftEl, { clearProps: "clipPath" });
+  });
+
+  return tl;
 };

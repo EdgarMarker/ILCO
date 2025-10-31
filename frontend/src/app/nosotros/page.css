@@ -1,22 +1,4 @@
 #About{
-  .section__hero{
-    .column__2{
-      .col__left{
-        h1,h2,p{
-          opacity: 0;
-          transform: translateY(50px);
-          transition: none;
-          will-change: opacity, transform;
-        }
-      }
-      .col__right{
-        opacity: 0;
-        transform: translateY(50px);
-        transition: none;
-        will-change: opacity, transform;
-      }
-    }
-  }
     .section__hero{
         padding: 100px 0% 0;
         .column__2{
@@ -238,7 +220,8 @@
                                 padding: 0 15%;
                                 align-items: stretch;
                                 .block__title{
-                                    padding-right: 10%;
+                                    width: 33.33%;
+                                    padding-right: 8%;
                                     display: flex;
                                     flex-direction: column;
                                     align-items: flex-start;
@@ -260,7 +243,8 @@
                                     aspect-ratio: 1/1.2;
                                 }
                                 .block__description{
-                                    padding-left: 10%;
+                                    width: 33.33%;
+                                    padding-left: 8%;
                                     display: flex;
                                     flex-direction: column;
                                     align-items: flex-start;
