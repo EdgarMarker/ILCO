@@ -5,8 +5,6 @@ import "@splidejs/react-splide/css";
 import { useRef } from "react";
 import type { HomePageModel } from "@/_domain/models/home-page.model";
 import CustomPortableText from "@/common/components/portable-text/CustomPortableText";
-import { useGSAP } from "@gsap/react";
-import { Pulse } from "../page.animation";
 
 interface Props {
 	testyData: HomePageModel;
@@ -100,11 +98,6 @@ const HomeTestimonialSection = ({ testyData }: Props) => {
 	const section = useRef<HTMLElement>(null);
 	const item = useRef<HTMLDivElement>(null);
 
-	/*
-	useGSAP(() => {
-		Pulse({ section: section.current});
-	});
-	*/
 
 	return (
 		<section className="section__testimonios fadeInOut" ref={section}>
