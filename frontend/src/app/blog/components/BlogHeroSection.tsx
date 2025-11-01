@@ -67,6 +67,7 @@ const BlogHeroSection = ({ data }: Props) => {
 						imageData={data.featured.ref_post.general.img_general_primaryImg}
 						variant="hero"
 						className="subject"
+						dataSpeed="clamp(0.8)"
 					/>
 				</div>
 			</div>

@@ -8,13 +8,18 @@ const page = async ({ params }: { params: { slug: string } }) => {
 	const rawData = await getProductsByCategory({ slug: params.slug });
 	const data = rawData.map((item: any) => new ProductModel(item));
 	return (
-		<>
-			<section className="section__hero fadeInOut">
+		<main id="CatProjects">
+			<section className="section__hero">
 				<div className="column__1">
-					<h1>{params.slug.toUpperCase()}</h1>
+					<span className="breadcrumbs">
+						<a href="/proyectos">Proyectos</a>
+						{" "}/{" "}
+						Categoría /
+					</span>
+					<h1>{data[0].general?.ref_productCategory?.string_line_category_name}</h1>
 				</div>
 			</section>
-			<section className="section__projects fadeInOut">
+			<section className="section__projects">
 				<div className="column__1">
 
 					<ul className="listado" role="list">
@@ -24,7 +29,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
 					</ul>
 				</div>
 			</section>
-		</>
+		</main>
 	);
 };
 

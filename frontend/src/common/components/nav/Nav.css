@@ -1,12 +1,13 @@
 header{
     width: 100%;
     background-color: var(--color-gray);
-    padding: 0 5%;
+    padding: 20px 5%;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 999;
     height: auto;
+    transition: padding 0.3s ease-in-out;
     nav{
         display: flex;
         flex-direction: row;
@@ -17,10 +18,11 @@ header{
             width: auto;
             line-height: 0;
             img{
-                height: 50px;
+                height: 65px;
                 width: auto;
                 position: relative;
                 z-index: -1;
+                transition: height 0.3s ease-in-out;
             }
         }
         ul.nav-links{
@@ -244,6 +246,7 @@ header{
 @media only screen and (max-width: 1024px){
 
     header{
+        padding: 0px 5%;
         nav{
             .logo{
                 img{

@@ -45,11 +45,11 @@ export default async function Footer() {
                             {NAV_ITEMS.map((item) => {
                                 return (
                                     <li key={item.href}>
-                                        <Link
+                                        <a
                                             href={item.href}
                                         >
                                             {item.title}
-                                        </Link>
+                                        </a>
                                     </li>
                                 );
                             })}
@@ -60,13 +60,13 @@ export default async function Footer() {
                         <h3>Proyectos por sector</h3>
                         <ul role="list">
                             <li>
-                                <Link href={"/proyectos"}>Todos los proyectos</Link>
+                                <a href={"/proyectos"}>Todos los proyectos</a>
                             </li>
                             {allCategory.map((category: ProductCategoryModel) => (
                                 <li key={category._id ?? category.slug.current}>
-                                    <Link href={`/proyectos/categoria/${category.slug.current}`}>
+                                    <a href={`/proyectos/categoria/${category.slug.current}`}>
                                         {category.string_line_category_name}
-                                    </Link>
+                                    </a>
                                 </li>
                             ))}
                         </ul>
@@ -76,14 +76,14 @@ export default async function Footer() {
                         <h3>Maquinaria por tipo</h3>
                         <ul role="list">
                             <li>
-                                <Link href="/renta-de-maquinaria">Todas las máquinas</Link>
+                                <a href="/renta-de-maquinaria">Todas las máquinas</a>
                             </li>
 
                             {allMachineCategory.map((category: MachineCategoryModel) => (
                                 <li key={category._id ?? category.slug.current}>
-                                <Link href={`/renta-de-maquinaria/categoria/${category.slug.current}`}>
+                                <a href={`/renta-de-maquinaria/categoria/${category.slug.current}`}>
                                     {category.string_line_category_name}
-                                </Link>
+                                </a>
                                 </li>
                             ))}
                         </ul>
@@ -101,12 +101,12 @@ export default async function Footer() {
                     </div>
                 </div>
                 <div className="col__right">
-                    <Link href={"/"}>
+                    <a href={"/"}>
                         <ResponsiveImage
                             imageData={data.general.icon_general_footerLogo}
                             variant="icon"
                         />
-                    </Link>
+                    </a>
                 </div>
 			</div>
 

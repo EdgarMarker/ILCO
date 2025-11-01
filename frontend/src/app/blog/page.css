@@ -4,6 +4,7 @@
         padding: 100px 0% 0;
         height: auto;
         width: 100%;
+        overflow: hidden;
         .column__2{
             .col__left{
                 background-color: var(--color-primary-dark);

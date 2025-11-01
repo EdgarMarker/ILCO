@@ -9,22 +9,27 @@ const page = async ({ params }: { params: { slug: string } }) => {
 	const data = rawData.map((item: any) => new PostModel(item));
 
 	return (
-		<>
-			<section className="section__hero fadeInOut">
+		<main id="CatBlog">
+			<section className="section__hero">
 				<div className="column__1">
-					<h1>{params.slug.toUpperCase()}</h1>
+					<span className="breadcrumbs">
+						<a href="/blog">Blog</a>
+						{" "}/{" "}
+						Categoría /
+					</span>
+					<h1>{data[0].general?.ref_postCategory?.string_line_category_name}</h1>
 				</div>
 			</section>
-			<section className="section__content fadeInOut">
+			<section className="section__content">
 				<div className="column__1">
-					<div className="listado">
+					<ul role="list" className="listado">
 						{data.map((post: PostModel, idx: number) => (
 							<PostCard key={idx ?? ""} postData={post} />
 						))}
-					</div>
+					</ul>
 				</div>
 			</section>
-		</>
+		</main>
 	);
 };
 

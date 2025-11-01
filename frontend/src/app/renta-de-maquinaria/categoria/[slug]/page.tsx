@@ -8,22 +8,27 @@ const page = async ({ params }: { params: { slug: string } }) => {
 	const rawData = await getMachineByCategory({ slug: params.slug });
 	const data = rawData.map((item: any) => new MachineModel(item));
 	return (
-		<>
-			<section className="section__hero fadeInOut">
+		<main id="CatMachines">
+			<section className="section__hero">
 				<div className="column__1">
-					<h1>{params.slug.toUpperCase()}</h1>
+					<span className="breadcrumbs">
+						<a href="/renta-de-maquinaria">Renta de maquinaria</a>
+						{" "}/{" "}
+						Categoría /
+					</span>
+					<h1>{data[0].general?.ref_machineCategory?.string_line_category_name}</h1>
 				</div>
 			</section>
-			<section className="section__content fadeInOut">
-				<div className="listado">
-					<div className="column__1">
+			<section className="section__content">
+				<div className="column__1">
+					<ul role="list" className="listado">
 						{data.map((post: MachineModel, idx: number) => (
 							<MachineCard key={idx ?? ""} data={post} />
 						))}
-					</div>
+					</ul>
 				</div>
 			</section>
-		</>
+		</main>
 	);
 };
 

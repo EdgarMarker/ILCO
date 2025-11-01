@@ -41,6 +41,7 @@ const page = async ({ params }: Props) => {
 				<ResponsiveImage
 					imageData={data.general.img_general_primaryImg}
 					variant="hero"
+					dataSpeed="clamp(0.7)"
 				/>
 				<div className="column__1">
 					<h3>
