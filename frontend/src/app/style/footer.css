@@ -117,11 +117,13 @@ footer{
                 flex-direction: column;
                 align-items: flex-end;
                 justify-content: flex-end;
-                width: fit-content;
+                width: 100%;
                 height: auto;
                 img{
-                    width: 50%;
+                    width: 45%;
                     height: auto;
+                    aspect-ratio: 1;
+                    object-fit: contain;
                 }
             }
         }
