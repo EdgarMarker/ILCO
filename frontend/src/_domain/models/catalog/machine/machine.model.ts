@@ -19,6 +19,7 @@ export class MachineModel extends BaseModel {
 		slug: SLUG;
 		string_line_general_title: string;
 		string_textarea_general_fullDsc: string;
+		date: string;
 	};
 	public page!: {
 		img_page_divider: Image;
@@ -58,6 +59,7 @@ export class MachineModel extends BaseModel {
 				string_textarea_general_fullDsc: this.safeString(
 					data?.general?.string_textarea_general_fullDsc,
 				),
+				date: this.safeDate(data?.general?.date),
 			},
 			page: {
 				list_img: data?.page?.list_img.map((item: any) => {

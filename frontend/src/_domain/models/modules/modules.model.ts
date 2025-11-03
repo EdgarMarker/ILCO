@@ -161,4 +161,31 @@ export class BaseModel {
 		}
 		return this.DEFAULT_SEO;
 	}
+
+	safeDate(value: unknown): string {
+		if (typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value)) {
+			const [year, month, day] = value.split("-");
+			return `${day}-${month}-${year}`;
+		}
+
+		let date: Date | null = null;
+		if (typeof value === "string" || typeof value === "number") {
+			const parsed = new Date(value);
+			if (!isNaN(parsed.getTime())) {
+				date = parsed;
+			}
+		} else if (value instanceof Date && !isNaN(value.getTime())) {
+			date = value;
+		}
+
+		if (!date) {
+			return "";
+		}
+
+		const day = String(date.getDate()).padStart(2, "0");
+		const month = String(date.getMonth() + 1).padStart(2, "0");
+		const year = date.getFullYear();
+
+		return `${day}-${month}-${year}`;
+	}
 }

@@ -18,7 +18,8 @@ export const POST_FIELDS = `
     },
     slug,
     string_line_general_title,
-    string_textarea_general_cardExcerpt
+    string_textarea_general_cardExcerpt,
+    date
   },
   page {
     list_block_post_page_content[]{

@@ -126,6 +126,14 @@ export const bool = ({ context, purpose, title }: Props) => {
 	};
 }
 
+export const date = () => {
+	return {
+		name: `date`,
+		title: "Fecha de publicación",
+		type: "date",
+	};
+}
+
 //*! ----- COMPONENTS -----
 
 export const SEO = () => {

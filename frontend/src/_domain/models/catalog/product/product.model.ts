@@ -19,6 +19,7 @@ export class ProductModel extends BaseModel {
 		string_line_general_location: string;
 		string_line_general_title: string;
 		string_textarea_general_cardExcerpt: string;
+		date: string;
 	};
 	public page!: {
 		page_video_result_media: string;
@@ -62,6 +63,7 @@ export class ProductModel extends BaseModel {
 				string_textarea_general_cardExcerpt: this.safeString(
 					data?.general?.string_textarea_general_cardExcerpt,
 				),
+				date: this.safeDate(data?.general?.date),
 			},
 			page: {
 				page_video_result_media: this.safeString(

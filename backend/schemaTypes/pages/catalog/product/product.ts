@@ -1,6 +1,7 @@
 import { createSection } from "../../../../utils/helper-createSection";
 import {
 	bool,
+	date,
 	image,
 	listBlockText,
 	SEO,
@@ -27,6 +28,7 @@ const SECTIONS = [
 				type: "reference",
 				to: [{ type: "productCategory" }],
 			},
+			date(),
 			stringText({
 				type: "line",
 				context: "general",

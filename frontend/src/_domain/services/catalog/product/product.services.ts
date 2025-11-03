@@ -23,7 +23,8 @@ export const PRODUCT_FIELDS = `
     slug,
     string_line_general_location,
     string_line_general_title,
-    string_textarea_general_cardExcerpt
+    string_textarea_general_cardExcerpt,
+    date
   },
   page {
     page_video_result_media,

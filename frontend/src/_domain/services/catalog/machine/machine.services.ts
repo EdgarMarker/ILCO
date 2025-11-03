@@ -18,7 +18,8 @@ export const MACHINE_FIELDS = `
     },
     slug,
     string_line_general_title,
-    string_textarea_general_fullDsc
+    string_textarea_general_fullDsc,
+    date
   },
   page {
   list_img[]{

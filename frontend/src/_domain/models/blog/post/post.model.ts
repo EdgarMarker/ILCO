@@ -19,6 +19,7 @@ export class PostModel extends BaseModel {
 		slug: SLUG;
 		string_line_general_title: string;
 		string_textarea_general_cardExcerpt: string;
+		date: string;
 	};
 	public page!: {
 		list_block_post_page_content: Block[];
@@ -48,6 +49,7 @@ export class PostModel extends BaseModel {
 				string_textarea_general_cardExcerpt: this.safeString(
 					data?.general?.string_textarea_general_cardExcerpt,
 				),
+				date: this.safeDate(data?.general?.date),
 			},
 			page: {
 				list_block_post_page_content: this.safeBlockText(

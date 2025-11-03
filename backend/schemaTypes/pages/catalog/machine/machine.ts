@@ -1,6 +1,7 @@
 import { createSection } from "../../../../utils/helper-createSection";
 import {
 	bool,
+	date,
 	image,
 	listBlockText,
 	SEO,
@@ -27,6 +28,7 @@ const SECTIONS = [
 				type: "reference",
 				to: [{ type: "machineCategory" }],
 			},
+			date(),
 			{
 				name: "file_general_brochure",
 				title: `Folleto de la ${MAGIC_TITLE}`,

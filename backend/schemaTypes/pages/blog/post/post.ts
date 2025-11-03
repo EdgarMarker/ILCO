@@ -1,5 +1,6 @@
 import { createSection } from "../../../../utils/helper-createSection";
 import {
+	date,
 	image,
 	listBlockText,
 	SEO,
@@ -30,6 +31,7 @@ const SECTIONS = [
 				type: "reference",
 				to: [{ type: "postAuthor" }],
 			},
+			date(),
 			stringText({
 				type: "textarea",
 				context: "general",
