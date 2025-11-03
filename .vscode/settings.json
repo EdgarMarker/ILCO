@@ -8,6 +8,7 @@
         "MACHINECATEGORY",
         "POSTAUTHOR",
         "POSTCATEGORY",
-        "PRODUCTCATEGORY"
+        "PRODUCTCATEGORY",
+
     ]
 }
