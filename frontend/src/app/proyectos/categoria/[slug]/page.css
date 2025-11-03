@@ -46,9 +46,12 @@
 
     .section__projects{
         padding: 5% 5%;
-        ul{
-            width: 100%;
+        .column__1{
+            ul{
+                width: 100%;
+            }
         }
+        
     }
 
     .card{

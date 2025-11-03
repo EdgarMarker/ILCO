@@ -88,6 +88,34 @@ const CatalogFilterSection = ({ dataPage, categories }: Props) => {
     <section id="Intro" className="section__projects" ref={sectionRef}>
       {/* ... encabezado/selector ... */}
 
+      <div className="column__2">
+				<div className="col__left">
+					<CustomPortableText
+						hasImg={false}
+						data={dataPage.products.list_block_title_products_title}
+					/>
+				</div>
+				<div className="col__right">
+					<label htmlFor="filterMachines">
+						Filtrar proyectos por sector:{" "}
+						<select
+							id="filterMachines"
+							name="filterMachines"
+							value={category}
+							onChange={(e) => setCategory(e.target.value)}
+							disabled={loading}
+						>
+							<option value="all">Seleccione una opción</option>
+							{categories.map((cat) => (
+								<option key={cat._id} value={cat.slug.current}>
+									{cat.string_line_category_name}
+								</option>
+							))}
+						</select>
+					</label>
+				</div>
+			</div>
+
       <div className="column__1">
         {loading ? (
           <div>Cargando proyectos...</div>

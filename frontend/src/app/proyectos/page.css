@@ -89,6 +89,9 @@
         .column__1{
             padding-top: 5vh;
             align-items: center;
+            ul{
+                width: 100%;
+            }
             .pagination{
                 margin-top: 5%;
                 display: flex;
