@@ -121,7 +121,7 @@ export class HomePageModel extends BaseModel {
 					data?.products?.string_line_products_btn,
 				),
 			},
-			seo: this.safeString(data?.seo),
+			seo: data?.seo,
 			testimonials: {
 				list_block_title_testimonials_title: this.safeBlockText(
 					data?.testimonials?.list_block_title_testimonials_title,
