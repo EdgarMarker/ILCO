@@ -15,7 +15,7 @@ import {
 const DOMAIN_URL = "https://www.ilco.mx";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  //Obtener datos dinámicos para las rutas dinámicas
+	//Obtener datos dinámicos para las rutas dinámicas
 	const [
 		posts,
 		postCategories,
@@ -41,7 +41,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			priority: 1,
 		},
 		{
-			url: `${DOMAIN_URL}/about`,
+			url: `${DOMAIN_URL}/nosotros`,
 			lastModified: new Date(),
 			changeFrequency: "monthly",
 			priority: 0.8,
@@ -63,6 +63,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			lastModified: new Date(),
 			changeFrequency: "monthly",
 			priority: 0.7,
+		},
+		{
+			url: `${DOMAIN_URL}/contacto`,
+			lastModified: new Date(),
+			changeFrequency: "monthly",
+			priority: 0.8,
+		},
+		{
+			url: `${DOMAIN_URL}/aviso-de-privacidad`,
+			lastModified: new Date(),
+			changeFrequency: "monthly",
+			priority: 0.8,
 		},
 	];
 
