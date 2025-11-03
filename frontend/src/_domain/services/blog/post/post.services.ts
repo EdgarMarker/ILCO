@@ -52,7 +52,7 @@ export const getAllPost = async () => {
 	const QUERY = `
     *[_type == "post"] {
       ${POST_FIELDS}
-    } | order(_createdAt desc)
+    } | order(!defined(general.date), general.date desc)
   `;
 	const data = await getSanityClient().fetch(QUERY);
 	return data;
@@ -73,7 +73,7 @@ export const getPostsByCategory = async ({ slug }: { slug: string }) => {
   const QUERY = `
     *[_type == "post" && general.ref_postCategory->slug.current == "${slug}"] {
       ${POST_FIELDS}
-    } | order(_createdAt desc)
+    } | order(!defined(general.date), general.date desc)
   `;
 
   const data = await getSanityClient().fetch(QUERY);

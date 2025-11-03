@@ -58,7 +58,7 @@ export const getAllMachines = async () => {
 	const QUERY = `
     *[_type == "machine"] {
       ${MACHINE_FIELDS}
-    } | order(_createdAt desc)
+    } | order(!defined(general.date), general.date desc)
   `;
 
 	const data = await getSanityClient().fetch(QUERY);
@@ -80,7 +80,7 @@ export const getMachineByCategory = async ({slug}: {slug: string}) => {
 	const QUERY = `
     *[_type == "machine" && general.ref_machineCategory->slug.current == "${slug}"] {
       ${MACHINE_FIELDS}
-    }
+    } | order(!defined(general.date), general.date desc)
   `;
 
 	const data = await getSanityClient().fetch(QUERY);

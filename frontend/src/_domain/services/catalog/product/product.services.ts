@@ -79,7 +79,7 @@ export const getAllProducts = async () => {
 	const QUERY = `
     *[_type == "product"] {
       ${PRODUCT_FIELDS}
-    } | order(_createdAt desc)
+    } | order(!defined(general.date), general.date desc)
   `;
 
 	const data = await getSanityClient().fetch(QUERY);
@@ -101,7 +101,7 @@ export const getProductsByCategory = async ({ slug }: { slug: string }) => {
   const QUERY = `
     *[_type == "product" && general.ref_productCategory->slug.current == "${slug}"] {
       ${PRODUCT_FIELDS}
-    }
+    } | order(!defined(general.date), general.date desc)
   `;
 
   const data = await getSanityClient().fetch(QUERY);
