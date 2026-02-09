@@ -40,7 +40,7 @@ const page = async () => {
 			/>
 
 			{/** MACHINES */}
-			<section className="section__machines fadeInOut">
+			<section className="section__machines">
 				<div className="column__2">
 					<div className="col__left">
 						<div className="portable__wrapper">
