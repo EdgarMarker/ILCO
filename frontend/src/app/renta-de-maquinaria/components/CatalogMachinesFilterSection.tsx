@@ -24,9 +24,8 @@ const CatalogFilterSection = ({ dataPage, categories }: Props) => {
 	const [machines, setMachines] = useState<MachineModel[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [page, setPage] = useState(1);
-
-	// 👇 Nuevo: flag para saber si el cambio de page viene de la paginación
-  	const [didPaginate, setDidPaginate] = useState(false);
+	const [didPaginate, setDidPaginate] = useState(false);
+	const [categoriesWithMachines, setCategoriesWithMachines] = useState<MachineCategoryModel[]>([]);
 
 	const itemsPerPage = 9;
 	const totalPages = Math.ceil(machines.length / itemsPerPage);
@@ -35,79 +34,107 @@ const CatalogFilterSection = ({ dataPage, categories }: Props) => {
 		page * itemsPerPage,
 	);
 
-	// Scroll helper (con Smoother si existe, si no nativo)
-  const scrollToSectionTop = () => {
-	const el = sectionRef.current;
-	if (!el) return;
+	// Scroll helper
+	const scrollToSectionTop = () => {
+		const el = sectionRef.current;
+		if (!el) return;
 
-	const smoother = ScrollSmoother?.get ? ScrollSmoother.get() : null;
-	if (smoother) {
-		smoother.scrollTo(el, true);
-	} else {
-		el.scrollIntoView({ behavior: "smooth", block: "start" });
-	}
+		const smoother = ScrollSmoother?.get ? ScrollSmoother.get() : null;
+		if (smoother) {
+			smoother.scrollTo(el, true);
+		} else {
+			el.scrollIntoView({ behavior: "smooth", block: "start" });
+		}
 	};
 
-  // Carga inicial / cambio de categoría
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      setPage(1);          // reset de página al cambiar categoría
-      setDidPaginate(false); // 👈 NO queremos scrollear por esto
-      const rawData =
-        category === "all" ? await getAllMachines() : await getMachineByCategory({ slug: category });
-      const productData = rawData.map((item: any) => new MachineModel(item));
-      setMachines(productData);
-      setLoading(false);
-    };
-    fetchData();
-  }, [category]);
+	// Carga inicial: obtén todas las máquinas y filtra categorías
+	useEffect(() => {
+		const fetchInitialData = async () => {
+			try {
+				const allMachines = await getAllMachines();
+				const machineData = allMachines.map((item: any) => new MachineModel(item));
 
-  // Solo scrollea si el cambio de page vino desde la paginación y ya terminó de cargar
-  useEffect(() => {
-  if (didPaginate && !loading) {
-    const id1 = requestAnimationFrame(() => {
-      const id2 = requestAnimationFrame(() => {
-        const el = sectionRef.current;
-        if (!el) return;
+				// Obtén los IDs de categorías que tienen al menos una máquina
+				const categoryIdsWithMachines = new Set(
+					machineData
+						.map((m: { general: { ref_machineCategory: { _id: any; }; }; }) => m.general?.ref_machineCategory?._id)
+						.filter(Boolean)
+				);
 
-        const smoother = ScrollSmoother?.get ? ScrollSmoother.get() : null;
+				// Filtra solo las categorías que tienen máquinas
+				const filtered = categories.filter((cat) =>
+					categoryIdsWithMachines.has(cat._id)
+				);
 
-        if (smoother) {
-          // re-calcula alturas internas de smoother y luego scrollea
-          smoother.refresh(true);
-          // usa un micro delay para no competir con el repaint
-          gsap.delayedCall(0, () => smoother.scrollTo(el, true));
-        } else {
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
+				setCategoriesWithMachines(filtered);
+			} catch (error) {
+				console.error("Error fetching initial data:", error);
+				setCategoriesWithMachines(categories);
+			}
+		};
 
-        setDidPaginate(false);
-      });
-    });
-    return () => {
-      cancelAnimationFrame(id1);
-      // id2 puede no existir si se desmonta antes
-    };
-  }
-}, [didPaginate, loading, page]);
+		fetchInitialData();
+	}, [categories]);
 
-  // Handlers de paginación que activan el flag
-  const goToPage = (num: number) => {
-  if (num === page) return;   // 👈 evita falso positivo
-  setDidPaginate(true);
-  setPage(num);
-};
-  const goPrev = () => {
-    setDidPaginate(true);
-    setPage((p) => Math.max(1, p - 1));
-  };
-  const goNext = () => {
-    setDidPaginate(true);
-    setPage((p) => Math.min(totalPages, p + 1));
-  };
+	// Carga de máquinas al cambiar categoría
+	useEffect(() => {
+		const fetchData = async () => {
+			setLoading(true);
+			setPage(1);
+			setDidPaginate(false);
+			const rawData =
+				category === "all" ? await getAllMachines() : await getMachineByCategory({ slug: category });
+			const machineData = rawData.map((item: any) => new MachineModel(item));
+			setMachines(machineData);
+			setLoading(false);
+		};
+		fetchData();
+	}, [category]);
 
-  return (
+	// Solo scrollea si el cambio de page vino desde la paginación y ya terminó de cargar
+	useEffect(() => {
+		if (didPaginate && !loading) {
+			const id1 = requestAnimationFrame(() => {
+				const id2 = requestAnimationFrame(() => {
+					const el = sectionRef.current;
+					if (!el) return;
+
+					const smoother = ScrollSmoother?.get ? ScrollSmoother.get() : null;
+
+					if (smoother) {
+						smoother.refresh(true);
+						gsap.delayedCall(0, () => smoother.scrollTo(el, true));
+					} else {
+						el.scrollIntoView({ behavior: "smooth", block: "start" });
+					}
+
+					setDidPaginate(false);
+				});
+			});
+			return () => {
+				cancelAnimationFrame(id1);
+			};
+		}
+	}, [didPaginate, loading, page]);
+
+	// Handlers de paginación que activan el flag
+	const goToPage = (num: number) => {
+		if (num === page) return;
+		setDidPaginate(true);
+		setPage(num);
+	};
+
+	const goPrev = () => {
+		setDidPaginate(true);
+		setPage((p) => Math.max(1, p - 1));
+	};
+
+	const goNext = () => {
+		setDidPaginate(true);
+		setPage((p) => Math.min(totalPages, p + 1));
+	};
+
+	return (
 		<section className="section__projects" ref={sectionRef}>
 			<div className="column__2">
 				<div className="col__left">
@@ -127,7 +154,7 @@ const CatalogFilterSection = ({ dataPage, categories }: Props) => {
 							disabled={loading}
 						>
 							<option value="all">Seleccione una opción</option>
-							{categories.map((cat) => (
+							{categoriesWithMachines.map((cat) => (
 								<option key={cat._id} value={cat.slug.current}>
 									{cat.string_line_category_name}
 								</option>
@@ -149,23 +176,24 @@ const CatalogFilterSection = ({ dataPage, categories }: Props) => {
 						</ul>
 						{totalPages > 1 && (
 							<div className="pagination">
-								
-
-								<button type="button" onClick={goPrev} disabled={page === 1}>‹</button>
+								<button type="button" onClick={goPrev} disabled={page === 1}>
+									‹
+								</button>
 
 								{Array.from({ length: totalPages }, (_, i) => i + 1).map((num) => (
-								<button
-									type="button"
-									key={num}
-									onClick={() => goToPage(num)}
-									className={page === num ? "active" : ""}
-								>
-									{num}
-								</button>
+									<button
+										type="button"
+										key={num}
+										onClick={() => goToPage(num)}
+										className={page === num ? "active" : ""}
+									>
+										{num}
+									</button>
 								))}
 
-								<button type="button" onClick={goNext} disabled={page === totalPages}>›</button>
-								
+								<button type="button" onClick={goNext} disabled={page === totalPages}>
+									›
+								</button>
 							</div>
 						)}
 					</>

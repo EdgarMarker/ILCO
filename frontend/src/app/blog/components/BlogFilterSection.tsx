@@ -21,6 +21,7 @@ const BlogFilterSection = ({ blogPage, categories }: Props) => {
 	const [posts, setPosts] = useState<PostModel[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [page, setPage] = useState(1);
+	const [categoriesWithPosts, setCategoriesWithPosts] = useState<PostCategoryModel[]>([]);
 
 	const itemsPerPage = 9;
 	const totalPages = Math.ceil(posts.length / itemsPerPage);
@@ -29,6 +30,36 @@ const BlogFilterSection = ({ blogPage, categories }: Props) => {
 		page * itemsPerPage,
 	);
 
+	// Carga inicial: obtén todos los posts y filtra categorías
+	useEffect(() => {
+		const fetchInitialData = async () => {
+			try {
+				const allPosts = await getAllPost();
+				const postData = allPosts.map((item: any) => new PostModel(item));
+
+				// Obtén los IDs de categorías que tienen al menos un post
+				const categoryIdsWithPosts = new Set(
+					postData
+						.map((p: { general: { ref_postCategory: { _id: any; }; }; }) => p.general?.ref_postCategory?._id)
+						.filter(Boolean),
+				);
+
+				// Filtra solo las categorías que tienen posts
+				const filtered = categories.filter((cat) =>
+					categoryIdsWithPosts.has(cat._id),
+				);
+
+				setCategoriesWithPosts(filtered);
+			} catch (error) {
+				console.error("Error fetching initial data:", error);
+				setCategoriesWithPosts(categories);
+			}
+		};
+
+		fetchInitialData();
+	}, [categories]);
+
+	// Carga de posts al cambiar categoría
 	useEffect(() => {
 		const fetchData = async () => {
 			setLoading(true);
@@ -37,7 +68,7 @@ const BlogFilterSection = ({ blogPage, categories }: Props) => {
 			const rawData =
 				category === "all"
 					? await getAllPost()
-					: await getPostsByCategory({slug: category});
+					: await getPostsByCategory({ slug: category });
 
 			const postData = rawData.map((item: any) => new PostModel(item));
 			setPosts(postData);
@@ -67,7 +98,7 @@ const BlogFilterSection = ({ blogPage, categories }: Props) => {
 							disabled={loading}
 						>
 							<option value="all">Seleccione una opción</option>
-							{categories.map((cat) => (
+							{categoriesWithPosts.map((cat) => (
 								<option key={cat._id} value={cat.slug.current}>
 									{cat.string_line_category_name}
 								</option>
