@@ -17,14 +17,17 @@ interface Props {
 }
 
 export const generateMetadata = async ({ params }: Props) => {
-	const rawData = await getProductData({ slug: params.slug });
+	const {slug} = await params
+	const rawData = await getProductData({ slug });
 	const data = new ProductModel(rawData);
 	return createMetadata(data.seo);
 };
 
 const page = async ({ params }: Props) => {
-	const rawData = await getProductData({ slug: params.slug });
+	const {slug} = await params
+	const rawData = await getProductData({ slug });
 	const data = new ProductModel(rawData);
+
 
 
 	function getYouTubeEmbedUrl(url: string) {

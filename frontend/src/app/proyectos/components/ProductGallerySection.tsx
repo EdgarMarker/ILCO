@@ -61,7 +61,7 @@ const ProductGallerySection = ({ productData }: Props) => {
 
 			<div className="column__1">
 				<Splide ref={splideRef} options={splideOptions}>
-					{productData.page.list_gallery.map((img, idx) => (
+					{productData.page?.list_gallery?.map((img, idx) => (
 						<SplideSlide key={idx ?? ""}>
 							<ResponsiveImage imageData={img} variant="gallery" />
 						</SplideSlide>

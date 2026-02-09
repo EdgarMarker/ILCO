@@ -19,13 +19,15 @@ interface Props {
 }
 
 export const generateMetadata = async ({ params }: Props) => {
-	const rawData = await getPostData({ slug: params.slug });
+	const {slug} = await params
+	const rawData = await getPostData({ slug });
 	const data = new PostModel(rawData);
 	return createMetadata(data.seo);
 };
 
 const page = async ({ params }: Props) => {
-	const rawData = await getPostData({ slug: params.slug });
+	const {slug} = await params
+	const rawData = await getPostData({ slug });
 	const rawAllCategory = await getAllPostCategories();
 	const rawAllPost = await getAllPost();
 

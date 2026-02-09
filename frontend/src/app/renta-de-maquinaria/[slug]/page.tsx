@@ -19,13 +19,15 @@ interface Props {
 }
 
 export const generateMetadata = async ({ params }: Props) => {
-	const rawData = await getMachineData({ slug: params.slug });
+	const {slug} = await params
+	const rawData = await getMachineData({ slug });
 	const data = new MachineModel(rawData);
 	return createMetadata(data.seo);
 };
 
 const page = async ({ params }: Props) => {
-	const rawData = await getMachineData({ slug: params.slug });
+	const {slug} = await params
+	const rawData = await getMachineData({ slug });
 	const data = new MachineModel(rawData);
 
 	return (
