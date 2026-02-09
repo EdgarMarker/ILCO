@@ -5,7 +5,8 @@ import { getPostsByCategory } from "@/_domain/services/blog/post/post.services";
 import PostCard from "@/common/components/cards/PostCard";
 
 const page = async ({ params }: { params: { slug: string } }) => {
-	const rawData = await getPostsByCategory({ slug: params.slug });
+	const { slug } = params;
+	const rawData = await getPostsByCategory({ slug });
 	const data = rawData.map((item: any) => new PostModel(item));
 
 	return (

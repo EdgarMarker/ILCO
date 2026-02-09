@@ -5,7 +5,8 @@ import { getMachineByCategory } from "@/_domain/services/catalog/machine/machine
 import MachineCard from "@/common/components/cards/MachineCard";
 
 const page = async ({ params }: { params: { slug: string } }) => {
-	const rawData = await getMachineByCategory({ slug: params.slug });
+	const { slug } = params;
+	const rawData = await getMachineByCategory({ slug });
 	const data = rawData.map((item: any) => new MachineModel(item));
 	return (
 		<main id="CatMachines">

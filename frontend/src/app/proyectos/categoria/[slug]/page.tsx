@@ -5,7 +5,8 @@ import { getProductsByCategory } from "@/_domain/services/catalog/product/produc
 import ProductCard from "@/common/components/cards/ProductCard";
 
 const page = async ({ params }: { params: { slug: string } }) => {
-	const rawData = await getProductsByCategory({ slug: params.slug });
+	const { slug } = params;
+	const rawData = await getProductsByCategory({ slug });
 	const data = rawData.map((item: any) => new ProductModel(item));
 	return (
 		<main id="CatProjects">
