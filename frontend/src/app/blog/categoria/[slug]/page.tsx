@@ -5,9 +5,11 @@ import { getPostsByCategory } from "@/_domain/services/blog/post/post.services";
 import PostCard from "@/common/components/cards/PostCard";
 
 const page = async ({ params }: { params: { slug: string } }) => {
-	const { slug } = params;
+	const { slug } = await params;
 	const rawData = await getPostsByCategory({ slug });
 	const data = rawData.map((item: any) => new PostModel(item));
+
+	console.log(data.general)
 
 	return (
 		<main id="CatBlog">
@@ -18,7 +20,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
 						{" "}/{" "}
 						Categoría /
 					</span>
-					<h1>{data[0].general?.ref_postCategory?.string_line_category_name}</h1>
+					<h1>{data[0].general.ref_postCategory?.string_line_category_name}</h1>
 				</div>
 			</section>
 			<section className="section__content">
