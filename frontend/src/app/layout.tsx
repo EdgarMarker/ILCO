@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+
 import "./style/globals.css";
 import "./style/footer.css";
+
 import { CompanyModel } from "@/_domain/models/company.model";
 import { getCompanyData } from "@/_domain/services/company.services";
+
 import Nav from "@/common/components/nav/Nav";
-import ScrollSmootherProvider from "@/common/lib/gsap/ScrollSmootherProvider";
-import { serialize } from "@/common/utils/helper-serialize";
-import { Inter } from 'next/font/google'
 import Footer from "@/common/components/footer/Footer";
+
+import ScrollSmootherProvider from "@/common/lib/gsap/ScrollSmootherProvider";
+
+import { serialize } from "@/common/utils/helper-serialize";
+import MetaPixel from "@/common/utils/MetaPixel";
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -15,10 +21,10 @@ export const metadata: Metadata = {
 };
 
 const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-primary', // opcional, útil si usas CSS variables
-  display: 'swap',
-})
+	subsets: ["latin"],
+	variable: "--font-primary",
+	display: "swap",
+});
 
 export default async function RootLayout({
 	children,
@@ -31,7 +37,12 @@ export default async function RootLayout({
 	return (
 		<html lang="es" className={inter.variable}>
 			<body suppressHydrationWarning>
+				<MetaPixel
+					pixelId={process.env.NEXT_PUBLIC_META_PIXEL_ID}
+				/>
+
 				<Nav companyData={serialize(data)} />
+
 				<ScrollSmootherProvider>
 					{children}
 					<Footer />
